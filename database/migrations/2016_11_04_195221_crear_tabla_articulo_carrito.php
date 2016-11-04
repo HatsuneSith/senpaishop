@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaCategoriaArticulo extends Migration
+class CrearTablaArticuloCarrito extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CrearTablaCategoriaArticulo extends Migration
      */
     public function up()
     {
-        Schema::create('categoria_articulo', function(Blueprint $table) {
-            $table->integer('categoria_id')->unsigned();
+        Schema::create('articulo_carrito', function(Blueprint $table) {
+            $table->integer('carrito_id')->unsigned();
             $table->integer('articulo_id')->unsigned();
-            $table->timestamps();
 
-            $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->foreign('carrito_id')->references('id')->on('carritos');
             $table->foreign('articulo_id')->references('id')->on('articulos');
         });
     }

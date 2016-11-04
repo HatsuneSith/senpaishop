@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaArticulos extends Migration
+class CrearTablaCarritos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CrearTablaArticulos extends Migration
      */
     public function up()
     {
-        Schema::create('articulos', function(Blueprint $table) {
+        Schema::create('carritos', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->integer('cantidad');
-            $table->integer('precio');
-            $table->string('descripcion');            
             $table->timestamps();
         });
     }
