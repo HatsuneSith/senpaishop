@@ -12,4 +12,14 @@ class Rol extends Model
     {
         return $this->hasMany('App\Usuario');
     }
+
+    public function cliente()
+    {
+    	if( count($rol = Rol::where('nombre', 'Cliente')->get()) ) {
+    		return $rol[0]->id;
+    	}
+    	else {
+    		dd('No existe el rol Cliente');
+    	}
+    }
 }

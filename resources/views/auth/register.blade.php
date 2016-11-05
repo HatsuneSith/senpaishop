@@ -64,7 +64,10 @@
                             <label for="genero" class="col-md-4 control-label">Genero</label>
 
                             <div class="col-md-6">
-                                <input id="genero" type="genero" class="form-control" name="genero" required>
+                                <select id="genero" type="genero" class="form-control" name="genero" required>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                </select>
 
                                 @if ($errors->has('genero'))
                                     <span class="help-block">
