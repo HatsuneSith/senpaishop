@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Usuario;
 use App\Rol;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -49,7 +49,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'nombre' => 'required|max:255',
             'email' => 'required|email|max:255|unique:usuarios',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -64,8 +64,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {        
         $rol = new Rol;        
-        return User::create([
-            'name' => $data['name'],
+        return Usuario::create([
+            'nombre' => $data['nombre'],
             'email' => $data['email'],
             'genero' => $data['genero'],            
             'rol_id' => $rol->cliente(),
