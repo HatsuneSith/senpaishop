@@ -19,12 +19,6 @@ class CrearLlavesForaneas extends Migration
             $table->foreign('rol_id')->references('id')->on('roles');
         });
 
-        Schema::table('articulos', function($table) {
-            $table->integer('sub_categoria_id')->unsigned();
-
-            $table->foreign('sub_categoria_id')->references('id')->on('sub_categorias');
-        });
-
         Schema::table('ventas', function($table) {
             $table->integer('articulo_id')->unsigned();
             $table->integer('usuario_id')->unsigned();
