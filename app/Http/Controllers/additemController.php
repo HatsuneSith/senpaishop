@@ -20,9 +20,8 @@ class additemController extends Controller{
 			        $num = count($data);
 			        echo "<br/>\n";
 			        $row++;
-			        for ($c=0; $c < $num; $c+=7) {
-
-						DB::table('articulos')->insert(
+			        for ($c=0; $c < $num; $c+=5) {
+			        	$idarticulo = DB::table('articulos')->insertGetId(
 						    [
 						    'nombre' => $data[$c], 
 						    'cantidad' => $data[$c+1],
@@ -30,6 +29,22 @@ class additemController extends Controller{
 						    'descripcion' => $data[$c+3],
 						    ]
 						);
+
+
+						$subcat=explode( ',', $data[$c+4] );
+						foreach ($subcat as & $subc) {
+
+							$idcategoria = 
+								DB::table('sub_categorias')->
+								select('id')->where('nombre', '=', $subc)->get();
+							echo $idarticulo;
+							echo $idcategoria[0]->id;
+							DB::table('subcategoria_articulo')->insert(
+							    ['sub_categoria_id' => $idcategoria[0]->id, 'articulo_id' => $idarticulo]
+							);
+
+						}
+
 
 			        }
 			    }
