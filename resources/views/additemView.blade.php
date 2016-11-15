@@ -24,12 +24,8 @@
 <div class="contenedor categorias-item-fix" >
 	<h2 class="categorias-item-fix-h2">Eliminar Categoria de Articulo</h1>
 	<div class="row">
-			 @foreach ($articulos as $articulo)
-			 	@foreach ($articulos->sub_categoria as $cat)
-					  <label>{{$cat->nombre}}</label>		
-				@endforeach    
-			@endforeach
-			<form  class="form-horizontal" action="/senpaishop/public/eliminar-subcategoria" method="get">
+	
+			<form  class="form-horizontal" action="/senpaishop/public/buscar-articulo" method="get">
 				<label  class="col-lg-2 control-label">Nombre</label>
 					<div class="col-lg-10 ">
 				  <input  class="form-control" list="lista-articulos" name="lista-articulos">
@@ -48,10 +44,10 @@
 		
 	</div>
 	<?php 
-		if (isset($item_eslim)) {
+		if (isset($item_elim)) {
 		
 	?>
-	<form class="form-horizontal">
+	<form class="form-horizontal" action="/senpaishop/public/eliminar-subcategoria/{{$articulo->id}}{{$item_elim->id}}" method="get">
 	  <fieldset>
 	    <div class="form-group">
 	      <label  class="col-lg-2 control-label">Nombre</label>
@@ -69,8 +65,9 @@
 	      <label for="select" class="col-lg-2 control-label">SubCategorias</label>
 	      <div class="col-lg-10">
 	        <select class="form-control" id="select">
-	        	@foreach ($item_elim->sub_categoria as $cat)
-	        	<option>1</option>
+				
+	        	@foreach ($item_elim->subcategorias as $cat)
+	        		<option  value="{{$articulo->id}}:{{$item_elim->id}}" >{{$cat->nombre}}</option>
 								    
 				@endforeach	
 
@@ -92,7 +89,7 @@
 </div>
 
 <div class="categorias-item-fix">
-	<h2 class="categorias-item-fix-h2">Cambiar Categoria de Item</h1>
+	<h2 class="categorias-item-fix-h2">Agregar Categoria de un Articulo</h1>
 	<div class="row">
 		<div class="col-lg-10">
 			<form action="demo_form.asp" method="get">
