@@ -47,3 +47,7 @@
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+form > .form-group {
+    margin: 0;
+}

@@ -86,18 +86,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </nav> 
 
 	@yield('contenido')
-
-<!---->
-<div class="subscribe">
-	 <div class="container">
-		 <h3>Newsletter</h3>
-		 <form>
-			 <input type="text" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
-			 <input type="submit" value="Subscribe">
-		 </form>
-	 </div>
-</div>
-<!---->
+ <!---->
 <div class="footer">
 	 <div class="container">
 		 <div class="footer-grids">
