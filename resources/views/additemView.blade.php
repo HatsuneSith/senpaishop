@@ -2,19 +2,7 @@
 
 @section('contenido')
 
-<ul class="nav nav-tabs">
-  <li class=""><a href="#home" data-toggle="tab" aria-expanded="false">CSV Upload</a></li>
-  <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">Editar Item</a></li>
-</ul>
-<div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade" id="home">
-    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-  </div>
-  <div class="tab-pane fade" id="profile">
-    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
-  </div>
-  
-</div>
+
 <div class="csv-fix">
 	<h2 class="csv-fix-h2">CSV Upload</h1>
 	<form method="POST" action="/senpaishop/public/upload" enctype="multipart/form-data">
@@ -33,7 +21,75 @@
 	</form>
 </div>
 
+<div class="contenedor categorias-item-fix" >
+	<h2 class="categorias-item-fix-h2">Eliminar Categoria de Articulo</h1>
+	<div class="row">
+			 @foreach ($articulos as $articulo)
+			 	@foreach ($articulos->sub_categoria as $cat)
+					  <label>{{$cat->nombre}}</label>		
+				@endforeach    
+			@endforeach
+			<form  class="form-horizontal" action="/senpaishop/public/eliminar-subcategoria" method="get">
+				<label  class="col-lg-2 control-label">Nombre</label>
+					<div class="col-lg-10 ">
+				  <input  class="form-control" list="lista-articulos" name="lista-articulos">
+				  <datalist id="lista-articulos">
+					  @foreach ($articulos as $articulo)
+					    <option value="{{$articulo->id}}: {{$articulo->nombre}}">				    
+					   @endforeach
+				  </datalist>
 
+				  </div>
+				  <div class="col-lg-10 col-lg-offset-2">
+			        <button type="reset" class="btn btn-default">Cancel</button>
+			        <button type="submit" class="btn btn-primary">Submit</button>
+			      </div>
+		      </form>
+		
+	</div>
+	<?php 
+		if (isset($item_eslim)) {
+		
+	?>
+	<form class="form-horizontal">
+	  <fieldset>
+	    <div class="form-group">
+	      <label  class="col-lg-2 control-label">Nombre</label>
+	      <label  class="col-lg-10">{{$item_elim->nombre}}</label>
+	    </div>
+	 
+	    <div class="form-group">
+	      <label for="textArea" class="col-lg-2 control-label">Descripcion</label>
+	      <div class="col-lg-10">
+			<span class="help-block">{{$item_elim->descripcion}}</span>
+	      </div>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="select" class="col-lg-2 control-label">SubCategorias</label>
+	      <div class="col-lg-10">
+	        <select class="form-control" id="select">
+	        	@foreach ($item_elim->sub_categoria as $cat)
+	        	<option>1</option>
+								    
+				@endforeach	
+
+	        </select>
+	    
+	      </div>
+	    </div>
+	    <div class="form-group">
+	      <div class="col-lg-10 col-lg-offset-2">
+	        <button type="reset" class="btn btn-default">Cancel</button>
+	        <button type="submit" class="btn btn-primary">Submit</button>
+	      </div>
+	    </div>
+	  </fieldset>
+	</form>
+	<?php 
+		} 
+	?>
+</div>
 
 <div class="categorias-item-fix">
 	<h2 class="categorias-item-fix-h2">Cambiar Categoria de Item</h1>
@@ -42,11 +98,9 @@
 			<form action="demo_form.asp" method="get">
 			  <input list="browsers" name="browser">
 			  <datalist id="browsers">
-			    <option value="Internet Explorer">
-			    <option value="Firefox">
-			    <option value="Chrome">
-			    <option value="Opera">
-			    <option value="Safari">
+				  @foreach ($articulos as $articulo)
+				    <option value="{{$articulo->nombre}}">				    
+				   @endforeach
 			  </datalist>
 			  <input type="submit">
 			</form>
@@ -83,5 +137,7 @@
 			</div>
 		</div>	
 	</div>
+
+
 </div>
 @stop

@@ -8,7 +8,18 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    Has iniciado sesión {{ $usuario->nombre }}!                
+
+                @if($usuario->verificado == 0)                    
+                    <p>
+                    No has registrado tu dirección de correo electrónico. Por favor revisa tu bandeja de entrada.
+                @endif
+
+                @if(isset($verificado))
+                    <p>
+                    Has verificado tu cuenta exitosamente!                    
+                @endif
+
                 </div>
             </div>
         </div>
