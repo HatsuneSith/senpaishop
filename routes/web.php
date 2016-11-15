@@ -22,3 +22,10 @@ Route::get('/home', 'HomeController@index');
 Route::get('/mail', 'HomeController@mail');
 
 Route::get('/confirmacion/{email}/{codigo}', 'GeneralController@confirmar_cuenta');
+
+Route::get('/agregar-articulo', 'additemController@mVista');
+Route::get('/eliminar-subcategoria', 'additemController@mElimiarSubCat_Item');
+Route::post('/upload', 'additemController@mAdd');
+
+Route::get('/product/{cat_id}', 'CategoriaController@productos_categoria');
+Route::get('/single/{art_id}', 'CategoriaController@producto');
