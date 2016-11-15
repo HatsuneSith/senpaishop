@@ -56,7 +56,13 @@
 <div class="container">
 
                     <form accept-charset="UTF-8" action="" method="post">
-                        Bananas: <input type="range" name="bananas" min="1" max="5">
+                        <span>Bananas:</span> 
+                        <img src="{{asset('img/banana.png')}}" alt="" id="banana-1" class="">
+                        <img src="{{asset('img/banana.png')}}" alt="" id="banana-2" class="hidden">
+                        <img src="{{asset('img/banana.png')}}" alt="" id="banana-3" class="hidden">
+                        <img src="{{asset('img/banana.png')}}" alt="" id="banana-4" class="hidden">
+                        <img src="{{asset('img/banana.png')}}" alt="" id="banana-5" class="hidden">
+                        <input id="banana-range" type="range" name="bananas" min="1" max="5" oninput="bananas(this.value)" onchange="bananas(this.value)">
                         <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Escribe un comentario..." rows="5"></textarea>
         
                         <div class="text-right">
@@ -335,6 +341,7 @@
                             <!-- end 2 -->
                             <div class="col-xs-3 col-md-3 text-right">
                                 <span class="glyphicon glyphicon-star"></span>1
+                                <img src="{{asset('img/banana.png')}}" alt="">
                             </div>
                             <div class="col-xs-8 col-md-9">
                                 <div class="progress">

@@ -27,7 +27,6 @@ class CategoriaController extends Controller
         	->get();
 
 
-
         $categorias=Categoria::all();  
         $sub_categorias=SubCategoria::all();    
 

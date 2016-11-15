@@ -13,9 +13,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--theme style-->
 <link href="{{asset("css/custom.css")}}" rel="stylesheet" type="text/css" media="all" />
 <link href="{{asset("css/style.css")}}" rel="stylesheet" type="text/css" media="all" />	
-<script src="{{asset("js/jquery.min.js")}}"></script>
-<script src="{{asset("js/bootstrap.js")}}"></script>
-<script src="{{asset("js/custom.js")}}"></script>
 <!--//theme style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -144,6 +141,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		 <div class="clearfix"></div>
 	 </div>
 </div>
+
+<script src="{{asset("js/jquery.min.js")}}"></script>
+<script src="{{asset("js/bootstrap.js")}}"></script>
+<script src="{{asset("js/custom.js")}}"></script>
 <!---->
 </body>
 </html>
