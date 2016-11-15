@@ -22,9 +22,4 @@ class Articulo extends Model
     {
         return $this->hasMany('App\Valoracion');
     }
-
-    public function sub_categoria()
-    {
-    	return $this->belongsTo('App\SubCategoria');
-	}
 }
