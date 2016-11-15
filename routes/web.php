@@ -17,8 +17,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-
 Route::get('/agregar-articulo', 'additemController@mVista');
+Route::get('/eliminar-subcategoria', 'additemController@mElimiarSubCat_Item');
 Route::post('/upload', 'additemController@mAdd');
 
 Route::get('/product/{cat_id}', 'CategoriaController@productos_categoria');

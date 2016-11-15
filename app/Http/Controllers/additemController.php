@@ -6,8 +6,22 @@ use Illuminate\Http\Request;
 use DB;
 
 class additemController extends Controller{
+	public function mElimiarSubCat_Item(Request $request) {
+		$input = $request->all();
+		foreach ($input as & $input_s) {		
+			$subcat=explode( ':', $input_s);
+		}
+
+		$item_elim = DB::table('articulos')->where('id', '=', $subcat[0])->get()->first();
+		$articulos = \App\Articulo::all();
+
+		return view('additemView', compact('item_elim','articulos') );
+  	
+	}
   	public function mVista() {
-	    return view('additemView');
+  		$articulos = \App\Articulo::all();
+	    
+	    return view('additemView', compact('articulos'));
 	}
   	public function mAdd() {
   		 /*request()->file('avatar')->store('avatars');*/
