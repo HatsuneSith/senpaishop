@@ -10,7 +10,7 @@ class SubCategoria extends Model
 
 	public function articulos()
 	{
-		return $this->hasMany('App\Articulo');
+		return $this->belongsToMany('App\Articulo', 'subcategoria_articulo');
 	}
 
 	public function categoria()

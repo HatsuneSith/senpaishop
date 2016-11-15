@@ -6,16 +6,26 @@ use Illuminate\Http\Request;
 use DB;
 
 class additemController extends Controller{
-	public function mElimiarSubCat_Item(Request $request) {
+	public function mBuscarArticulo(Request $request) {
 		$input = $request->all();
 		foreach ($input as & $input_s) {		
 			$subcat=explode( ':', $input_s);
 		}
 
-		$item_elim = DB::table('articulos')->where('id', '=', $subcat[0])->get()->first();
+		$item_elim = \App\Articulo::where('id',$subcat[0])->get() ->first();
 		$articulos = \App\Articulo::all();
 
 		return view('additemView', compact('item_elim','articulos') );
+  	
+	}
+	public function mElimiarSubCat_Item($ida,$idi) {
+		\App\SubCategoria_Articulo::where([
+			    ['articulo_id', '=', '45'],
+			    ['sub_categoria_id', '=', '1'],
+			])->delete();
+		
+	$articulos = \App\Articulo::all();
+	return view('additemView', compact('articulos'));
   	
 	}
   	public function mVista() {

@@ -5,7 +5,7 @@
 	 <div class="container">
 		<ol class="breadcrumb">		  
 		</ol>
-		<h2>Our Products</h2>			
+		<h2>Artículos</h2>			
 		<div class="col-md-9 product-model-sec">
 			
 
@@ -25,12 +25,7 @@
 							<div class="product-info-cust prt_name">
 								<h4> {{$pr->nombre}}</h4>								
 								<span class="item_price">${{$pr->precio}}</span>
-								<div class="ofr">
-									  <p class="pric1"><del>Rs 280</del></p>
-							          <p class="disc">[12% Off]</p>
-									</div> 
-								<input type="text" class="item_quantity" value="1" />
-								<input type="button" class="item_add items" value="ADD">
+								
 								<div class="clearfix"> </div>
 							</div>												
 							
@@ -47,14 +42,14 @@
 			<div class="rsidebar span_1_of_left">
 				 <section  class="sky-form">
 					 <div class="product_right">
-						 <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4>
+						 <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categorías</h4>
 
 
 						@foreach($categorias as $cat)
 						 <div class="tab1">
 							 <ul class="place">								
 								 <li class="sort">{{$cat->nombre}}</li>
-								 <li class="by"><img src="../img/do.png" alt=""></li>
+								 <li class="by"><img src="{{asset("img/do.png")}}" alt=""></li>
 									<div class="clearfix"> </div>
 							  </ul>
 							 <div class="single-bottom">	

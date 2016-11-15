@@ -24,9 +24,8 @@ class Articulo extends Model
     }
 
 
-    public function sub_categorias()
+    public function subcategorias()
     {
-    	return $this->belongsTo('App\SubCategoria');
-	}
-
+        return $this->belongsToMany('App\SubCategoria', 'subcategoria_articulo');
+    }
 }

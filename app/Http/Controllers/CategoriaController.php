@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Articulo;
 use App\Categoria;
 use App\SubCategoria;
+use App\subcategoria_articulo;
 use DB;
 
 class CategoriaController extends Controller
@@ -18,9 +19,14 @@ class CategoriaController extends Controller
 
 
 
-    	$productos=DB::table('articulos')
-        	->where('sub_categoria_id', '=', $cat_id)
+    	$productos=DB::table('subcategoria_articulo')
+            ->join('articulos','subcategoria_articulo.articulo_id','=','articulos.id')
+            ->join('sub_categorias','subcategoria_articulo.sub_categoria_id','=','sub_categorias.id')
+        	->where('sub_categorias.id', '=', $cat_id)
+            ->select('articulos.id','articulos.nombre','articulos.cantidad','articulos.precio','articulos.descripcion')
         	->get();
+
+
 
         $categorias=Categoria::all();  
         $sub_categorias=SubCategoria::all();    
