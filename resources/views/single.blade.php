@@ -22,24 +22,12 @@
 							
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+							
+						    </div>
+							<a href="#" class="add-cart item_add">ADD TO CART</a>							
 					 </div>
 				 </div>
-			
+				
 			 </div>
 	     </div>
 

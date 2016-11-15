@@ -7,6 +7,8 @@ use App\Rol;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmarCuenta;
 
 class RegisterController extends Controller
 {
@@ -63,13 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {        
-        $rol = new Rol;        
-        return Usuario::create([
+        $rol = new Rol;
+        $usuario = Usuario::create([
             'nombre' => $data['nombre'],
             'email' => $data['email'],
             'genero' => $data['genero'],            
             'rol_id' => $rol->cliente(),
             'password' => bcrypt($data['password']),
         ]);
+
+        Mail::to($data['email'])->send(new ConfirmarCuenta($data['email']));        
+
+        return $usuario;
     }
 }

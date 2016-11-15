@@ -24,7 +24,11 @@
 <div class="contenedor categorias-item-fix" >
 	<h2 class="categorias-item-fix-h2">Eliminar Categoria de Articulo</h1>
 	<div class="row">
-			
+			 @foreach ($articulos as $articulo)
+			 	@foreach ($articulos->sub_categoria as $cat)
+					  <label>{{$cat->nombre}}</label>		
+				@endforeach    
+			@endforeach
 			<form  class="form-horizontal" action="/senpaishop/public/eliminar-subcategoria" method="get">
 				<label  class="col-lg-2 control-label">Nombre</label>
 					<div class="col-lg-10 ">
@@ -44,7 +48,7 @@
 		
 	</div>
 	<?php 
-		if (isset($item_elim)) {
+		if (isset($item_eslim)) {
 		
 	?>
 	<form class="form-horizontal">
@@ -65,9 +69,9 @@
 	      <label for="select" class="col-lg-2 control-label">SubCategorias</label>
 	      <div class="col-lg-10">
 	        <select class="form-control" id="select">
-	        	@foreach ($item_elim->subcategorias as $articulo)
+	        	@foreach ($item_elim->sub_categoria as $cat)
 	        	<option>1</option>
-					<option value="{{$articulo->id}}: {{$articulo->nombre}}">				    
+								    
 				@endforeach	
 
 	        </select>

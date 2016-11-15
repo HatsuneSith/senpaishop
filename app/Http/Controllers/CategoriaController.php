@@ -22,7 +22,7 @@ class CategoriaController extends Controller
     	$productos=DB::table('subcategoria_articulo')
             ->join('articulos','subcategoria_articulo.articulo_id','=','articulos.id')
             ->join('sub_categorias','subcategoria_articulo.sub_categoria_id','=','sub_categorias.id')
-        	->where('sub_categoria_id', '=', $cat_id)
+        	->where('sub_categorias.id', '=', $cat_id)
             ->select('articulos.id','articulos.nombre','articulos.cantidad','articulos.precio','articulos.descripcion')
         	->get();
 
