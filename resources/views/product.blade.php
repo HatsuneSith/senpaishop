@@ -14,10 +14,10 @@
 					<a href="../single/{{$pr->id}}"><div class="product-grid">
 						<div class="more-product"><span></span></div>						
 						<div class="product-img b-link-stripe b-animate-go  thickbox">
-							<img src="{{asset("img/img1.jpg")}}" class="img-responsive" alt="">
+							<img src="../storage/app/articulos/{{$pr->id}}.jpg" class="img-responsive" alt="">
 							<div class="b-wrapper">
 							<h4 class="b-animate b-from-left  b-delay03">							
-							<button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
+							<button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Compra ya</button>
 							</h4>
 							</div>
 						</div></a>						
@@ -66,10 +66,10 @@
 						@endforeach
 
 									 
-				 </section>
-				 
+				 </section> 
 			 </div>				 
 	      </div>
+	      <ol class="breadcrumb"></ol>
 		</div>
 </div>
 @stop

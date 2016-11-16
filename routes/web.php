@@ -32,3 +32,4 @@ Route::post('/upload', 'additemController@mAdd');
 
 Route::get('/product/{cat_id}', 'CategoriaController@productos_categoria');
 Route::get('/single/{art_id}', 'CategoriaController@producto');
+Route::get('/inventario', 'CategoriaController@inventario');
