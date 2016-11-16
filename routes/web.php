@@ -25,8 +25,12 @@ Route::get('/confirmacion/{email}/{codigo}', 'GeneralController@confirmar_cuenta
 
 Route::get('/agregar-articulo', 'additemController@mVista');
 Route::get('/buscar-articulo', 'additemController@mBuscarArticulo');
-Route::get('/eliminar-subcategoria/{ida}{idi}', 'additemController@mElimiarSubCat_Item');
+Route::get('/buscar-articulo2', 'additemController@mBuscarArticulo2');
+Route::get('/eliminar-subcategoria/', 'additemController@mElimiarSubCat_Item');
+Route::get('/agregar-subcategoria/', 'additemController@mAgregarSubCat_Item');
+Route::get('/agregar-articulo-individual/', 'additemController@mAgregar_Item');
 Route::post('/upload', 'additemController@mAdd');
 
 Route::get('/product/{cat_id}', 'CategoriaController@productos_categoria');
 Route::get('/single/{art_id}', 'CategoriaController@producto');
+Route::get('/inventario', 'CategoriaController@inventario');

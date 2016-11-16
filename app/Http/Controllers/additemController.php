@@ -6,6 +6,29 @@ use Illuminate\Http\Request;
 use DB;
 
 class additemController extends Controller{
+
+
+
+	public function mAgregar_Item(Request $request) {
+		
+		$item = new \App\Articulo;
+		$item ->nombre =$request->input('nombre');
+		$item ->cantidad =$request->input('cantidad');
+		$item ->precio =$request->input('precio');
+		$item ->descripcion =$request->input('descripcion');
+		$item ->save();
+		$subcategorias=$request->input('subc');
+		$subcat=explode( ',', $subcategorias);
+
+		foreach ($subcat as & $var) {
+			
+			$SubCre = new \App\SubCategoria_Articulo;
+			$SubCre->sub_categoria_id = $var;
+			$SubCre->articulo_id = $item->id;
+			$SubCre->save();
+		}
+  	
+	}
 	public function mBuscarArticulo(Request $request) {
 		$input = $request->all();
 		foreach ($input as & $input_s) {		
@@ -18,14 +41,65 @@ class additemController extends Controller{
 		return view('additemView', compact('item_elim','articulos') );
   	
 	}
-	public function mElimiarSubCat_Item($ida,$idi) {
+
+
+
+
+
+
+
+
+
+
+
+	public function mBuscarArticulo2(Request $request) {
+		$input = $request->all();
+		foreach ($input as & $input_s) {		
+			$subcat=explode( ':', $input_s);
+		}
+
+		$item_agre = \App\Articulo::where('id',$subcat[0])->get() ->first();
+		$articulos = \App\Articulo::all();
+
+		return view('additemView', compact('item_agre','articulos') );
+  	
+	}
+	public function mAgregarSubCat_Item(Request $request) {
+
+		$subcate=$request->input('subc');
+		$subcat=explode( ',', $subcate);
+		foreach ($subcat as & $var) {
+			
+			$SubCre = new \App\SubCategoria_Articulo;
+			$SubCre->sub_categoria_id =  $var;
+			$SubCre->articulo_id = $request->input('artid');
+			$SubCre->save();
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public function mElimiarSubCat_Item(Request $request) {
+		$input = $request->all();
+		foreach ($input as & $input_s) {		
+			$subcat=explode( ':', $input_s);
+		}
 		\App\SubCategoria_Articulo::where([
-			    ['articulo_id', '=', '45'],
-			    ['sub_categoria_id', '=', '1'],
+			    ['articulo_id', '=', $subcat[0]],
+			    ['sub_categoria_id', '=', $subcat[1]],
 			])->delete();
 		
-	$articulos = \App\Articulo::all();
-	return view('additemView', compact('articulos'));
+		$articulos = \App\Articulo::all();
+		return view('additemView', compact('articulos'));
   	
 	}
   	public function mVista() {
@@ -42,7 +116,6 @@ class additemController extends Controller{
 			if (($handle = fopen($file2 , "r")) !== FALSE) {
 			    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 			        $num = count($data);
-			        echo "<br/>\n";
 			        $row++;
 			        for ($c=0; $c < $num; $c+=5) {
 			        	$idarticulo = DB::table('articulos')->insertGetId(
@@ -51,24 +124,27 @@ class additemController extends Controller{
 						    'cantidad' => $data[$c+1],
 						    'precio' => $data[$c+2],
 						    'descripcion' => $data[$c+3],
+						    'created_at' =>  \Carbon\Carbon::now(),
+           					'updated_at' => \Carbon\Carbon::now(),
 						    ]
 						);
 
 
 						$subcat=explode( ',', $data[$c+4] );
-						foreach ($subcat as & $subc) {
 
+						foreach ($subcat as & $subc) {
 							$idcategoria = 
 								DB::table('sub_categorias')->
 								select('id')->where('nombre', '=', $subc)->get();
-							echo $idarticulo;
-							echo $idcategoria[0]->id;
-							DB::table('subcategoria_articulo')->insert(
-							    ['sub_categoria_id' => $idcategoria[0]->id, 'articulo_id' => $idarticulo]
-							);
+
+
+							$SubCre = new \App\SubCategoria_Articulo;
+							$SubCre->sub_categoria_id = $idcategoria[0]->id;
+							$SubCre->articulo_id = $idarticulo;
+							$SubCre->save();
+						
 
 						}
-
 
 			        }
 			    }
@@ -76,6 +152,8 @@ class additemController extends Controller{
 			}
 	
 
-	  
+	  	$articulos = \App\Articulo::all();
+	    
+	    return view('additemView', compact('articulos'));
 	}
 }
