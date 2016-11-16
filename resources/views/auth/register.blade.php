@@ -49,8 +49,8 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('genero') ? ' has-error' : '' }}">
-                            <h5>Genero</h5>                            
-                            <select id="genero" type="genero" name="genero" required>
+                            <h5>Género</h5>                            
+                            <select id="genero" type="genero" name="genero" required class="form-control">
                                 <option value="Masculino">Masculino</option>
                                 <option value="Femenino">Femenino</option>
                             </select>                      

@@ -106,3 +106,17 @@ form > .form-group {
 .com_review-block-description{
     font-size:13px;
 }
+
+/*
+**************
+*** Navbar ***
+**************
+*/
+
+.form-control {
+    border-radius: 0;
+}
+
+.navbar-form .form-control {
+    margin-left: 2em;
+}

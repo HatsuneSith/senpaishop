@@ -11,20 +11,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="{{asset("css/bootstrap.css")}}" rel="stylesheet" type="text/css" media="all" />
 <!-- Custom Theme files -->
 <!--theme style-->
-<link href="{{asset("css/custom.css")}}" rel="stylesheet" type="text/css" media="all" />
 <link href="{{asset("css/style.css")}}" rel="stylesheet" type="text/css" media="all" />	
+<link href="{{asset("css/custom.css")}}" rel="stylesheet" type="text/css" media="all" />
 <!--//theme style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- start menu -->
-<script src="{{asset("js/simpleCart.min.js")}}"> </script>
-<!-- start menu -->
-<link href="css/memenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/memenu.js"></script>
-<script>$(document).ready(function(){$(".memenu").memenu();});</script>	
-<!-- /start menu -->
+
 </head>
 <body> 
 <!--header-->	
@@ -40,48 +33,72 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       });
     });
   </script>
- <nav class="navbar ">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+<div class="header-top">
+	<div class="header-bottom">			
+		<div class="logo">
+			<h1><a href="{{ url('/') }}"><img src="{{ asset('/img/logo.png') }}" alt=""></a></h1>
+		</div>		
+		 <!---->		 
+		 <div class="top-nav">
+			<ul class="memenu skyblue">				
+				<li class="grid"><a href="#">Categorias</a>
+					<div class="mepanel">
+						<div class="row">
+							@foreach($categorias as $categoria)
+								<div class="col1 me-one">
+									<h4>{{ $categoria->nombre }}</h4>
+									<ul>
+										@foreach($categoria->sub_categorias as $sc)
+											<li><a href="">{{ $sc->nombre }}</a></li>
+										@endforeach
+									</ul>
+								</div>
+							@endforeach							
+						</div>
+					</div>
+				</li>
+				@if(Auth::guest())
+					<li class="grid"><a href="{{ url('/login') }}">Login</a></li>
+                    <li class="grid"><a href="{{ url('/register') }}">Registrar</a></li>
+				@else
+					<li class="grid"><a href="">Panel</a></li>
+					@if(Auth::user()->rol->nombre == 'Admin')
+						<li class="grid"><a href="">Administrar</a></li>
+					@endif
+					<li>
+	                    <a href="{{ url('/logout') }}"
+	                        onclick="event.preventDefault();
+	                                 document.getElementById('logout-form').submit();">
+	                        Cerrar Sesión
+	                    </a>
 
-      <a class="navbar-brand" href="#">SenpaiShop</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-      </ul>
-    </div>
-  </div>
-</nav> 
+	                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+	                        {{ csrf_field() }}
+	                    </form>
+	                </li>
+				@endif				
+			</ul>
+			<div class="clearfix"> </div>
+		 </div>
+		 <!---->
+		@if(Auth::check())
+			<div class="cart box_1">		
+				<a href="checkout.html">
+					<div class="total">
+						<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span>)
+					</div>
+					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+				</a>
+				<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+			 	<div class="clearfix"> </div>
+			</div>
+		@endif
+		<div class="clearfix"> 
+		</div>
+	</div>
+	<div class="clearfix"> 		
+	</div>
+</div>
 
 	@yield('contenido')
  <!---->
@@ -144,6 +161,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <script src="{{asset("js/jquery.min.js")}}"></script>
 <script src="{{asset("js/bootstrap.js")}}"></script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- start menu -->
+<script src="{{asset("js/simpleCart.min.js")}}"> </script>
+<!-- start menu -->
+<link href="{{asset("css/memenu.css")}}" rel="stylesheet" type="text/css" media="all" />
+<script>$(document).ready(function(){$(".memenu").memenu();});</script>	
+<!-- /start menu -->
+<script src="{{asset("js/memenu.js")}}"></script>
 <script src="{{asset("js/custom.js")}}"></script>
 <!---->
 </body>
