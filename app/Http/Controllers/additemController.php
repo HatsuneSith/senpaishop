@@ -18,10 +18,14 @@ class additemController extends Controller{
 		return view('additemView', compact('item_elim','articulos') );
   	
 	}
-	public function mElimiarSubCat_Item($ida,$idi) {
+	public function mElimiarSubCat_Item(Request $request) {
+		$input = $request->all();
+		foreach ($input as & $input_s) {		
+			$subcat=explode( ':', $input_s);
+		}
 		\App\SubCategoria_Articulo::where([
-			    ['articulo_id', '=', '45'],
-			    ['sub_categoria_id', '=', '1'],
+			    ['articulo_id', '=', $subcat[0]],
+			    ['sub_categoria_id', '=', $subcat[1]],
 			])->delete();
 		
 	$articulos = \App\Articulo::all();

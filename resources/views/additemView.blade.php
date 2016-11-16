@@ -47,7 +47,7 @@
 		if (isset($item_elim)) {
 		
 	?>
-	<form class="form-horizontal" action="/senpaishop/public/eliminar-subcategoria/{{$articulo->id}}{{$item_elim->id}}" method="get">
+	<form class="form-horizontal" >
 	  <fieldset>
 	    <div class="form-group">
 	      <label  class="col-lg-2 control-label">Nombre</label>
@@ -61,28 +61,29 @@
 	      </div>
 	    </div>
 
-	    <div class="form-group">
-	      <label for="select" class="col-lg-2 control-label">SubCategorias</label>
-	      <div class="col-lg-10">
-	        <select class="form-control" id="select">
-				
-	        	@foreach ($item_elim->subcategorias as $cat)
-	        		<option  value="{{$articulo->id}}:{{$item_elim->id}}" >{{$cat->nombre}}</option>
-								    
-				@endforeach	
 
-	        </select>
-	    
-	      </div>
-	    </div>
-	    <div class="form-group">
-	      <div class="col-lg-10 col-lg-offset-2">
-	        <button type="reset" class="btn btn-default">Cancel</button>
-	        <button type="submit" class="btn btn-primary">Submit</button>
-	      </div>
-	    </div>
+	    	
 	  </fieldset>
 	</form>
+		<div class="row">
+			<form  class="form-horizontal" action="senpaishop/public/eliminar-subcategoria/" method="get">
+				<label  class="col-lg-2 control-label">Nombre</label>
+					<div class="col-lg-10 ">
+				  <input  class="form-control" list="lista-categorias" name="lista-categorias">
+				  <datalist id="lista-categorias">
+				  @foreach ($item_elim->subcategorias as $cat)
+	        		<option  value=" {{$item_elim->id}}:{{$cat->id}}" >{{$cat->nombre}}</option>
+								    
+				  @endforeach	
+				  </datalist>
+
+				  </div>
+				  <div class="col-lg-10 col-lg-offset-2">
+			        <button type="reset" class="btn btn-default">Cancel</button>
+			        <button type="submit" class="btn btn-primary">Submit</button>
+			      </div>
+		      </form>
+		</div>
 	<?php 
 		} 
 	?>
