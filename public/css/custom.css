@@ -4,7 +4,7 @@
 .categorias-item-fix{
 	margin: auto;
 	width: 50%;
-    border: 3px solid green;
+     border: 3px solid #7D7D7D;
     padding: 10px;
 
 }
@@ -16,7 +16,7 @@
 .csv-fix{
 	margin: auto;
 	width: 50%;
-    border: 3px solid green;
+    border: 3px solid #7D7D7D;
     padding: 10px;
 }
 .csv-fix-h2{
@@ -51,6 +51,8 @@
 form > .form-group {
     margin: 0;
 }
+
+
 
 /* Estilos para los comentarios 2 */
 .glyphicon { margin-right:5px;}
