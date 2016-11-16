@@ -55,24 +55,28 @@ class additemController extends Controller{
 						    'cantidad' => $data[$c+1],
 						    'precio' => $data[$c+2],
 						    'descripcion' => $data[$c+3],
+						    'created_at' =>  \Carbon\Carbon::now(),
+           					'updated_at' => \Carbon\Carbon::now(),
 						    ]
 						);
 
 
 						$subcat=explode( ',', $data[$c+4] );
-						foreach ($subcat as & $subc) {
 
+						foreach ($subcat as & $subc) {
 							$idcategoria = 
 								DB::table('sub_categorias')->
 								select('id')->where('nombre', '=', $subc)->get();
-							echo $idarticulo;
-							echo $idcategoria[0]->id;
-							DB::table('subcategoria_articulo')->insert(
-							    ['sub_categoria_id' => $idcategoria[0]->id, 'articulo_id' => $idarticulo]
-							);
+							echo "idcategoria: ".$idcategoria;
+							echo "idarticulo: ".$idarticulo;
+
+							$SubCre = new \App\SubCategoria_Articulo;
+							$SubCre->sub_categoria_id = $idcategoria[0]->id;
+							$SubCre->articulo_id = $idarticulo;
+							$SubCre->save();
+						
 
 						}
-
 
 			        }
 			    }
