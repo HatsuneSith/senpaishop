@@ -1,4 +1,10 @@
-$("#banana-range").val(1);
+
+
+
+
+// JS para los comentarios y las puntuaciones de los articulos:
+
+$("#banana-range").val(3);
 
 $("#banana-range").on('input change', function() {	
 	var bananas = $('#banana-range').val();		
