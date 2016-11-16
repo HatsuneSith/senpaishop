@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Articulo;
 use App\Categoria;
 use App\SubCategoria;
@@ -37,15 +38,19 @@ class CategoriaController extends Controller
 
 
     public function producto($art_id){
-
-
+        
+        
     	$producto=Articulo::find($art_id);
         return view('single',compact('producto'));
     }
 
 
     public function inventario(){
-
+        
+        if(Auth::guest() or Auth::user()->rol->nombre == 'Cliente') 
+        {
+            return redirect()->back();
+        }
 
         $productos=DB::table('articulos')->paginate(10);
         return view('inventario',compact('productos'));

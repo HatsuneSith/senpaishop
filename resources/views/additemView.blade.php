@@ -1,5 +1,11 @@
 @extends('layout')
 
+@if(Auth::guest() or Auth::user()->rol->nombre == 'Cliente')
+	@section('contenido')
+	<h1>Sácate alv</h1>
+	@stop
+@else
+
 @section('contenido')
 <ul class="nav nav-tabs">
   <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
@@ -203,3 +209,4 @@
 		?>
 	</div>
 @stop
+@endif

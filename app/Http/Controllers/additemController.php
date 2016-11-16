@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DB;
 
@@ -10,7 +11,7 @@ class additemController extends Controller{
 
 
 	public function mAgregar_Item(Request $request) {
-		
+
 		$item = new \App\Articulo;
 		$item ->nombre =$request->input('nombre');
 		$item ->cantidad =$request->input('cantidad');
@@ -103,6 +104,7 @@ class additemController extends Controller{
   	
 	}
   	public function mVista() {
+
   		$articulos = \App\Articulo::all();
 	    
 	    return view('additemView', compact('articulos'));
