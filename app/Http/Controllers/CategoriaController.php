@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Articulo;
 use App\Categoria;
 use App\SubCategoria;
+use App\Imagen;
 use App\subcategoria_articulo;
 use DB;
 
@@ -28,7 +29,7 @@ class CategoriaController extends Controller
 
 
         $categorias=Categoria::all();  
-        $sub_categorias=SubCategoria::all();    
+        $sub_categorias=SubCategoria::all(); 
 
         return view('product',compact('productos','categorias','sub_categorias'));
     }
@@ -39,7 +40,14 @@ class CategoriaController extends Controller
 
 
     	$producto=Articulo::find($art_id);
-
         return view('single',compact('producto'));
+    }
+
+
+    public function inventario(){
+
+
+        $productos=DB::table('articulos')->paginate(10);
+        return view('inventario',compact('productos'));
     }
 }
