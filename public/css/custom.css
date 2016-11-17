@@ -125,3 +125,8 @@ form > .form-group {
 .navbar-form .form-control {
     margin-left: 2em;
 }
+
+.home-cont {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}

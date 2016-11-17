@@ -108,7 +108,7 @@ class CategoriaController extends Controller
         $yes=$datos->input('ArtID');
         $comentario->save();
 
-        return Redirect('/single/1');
+        return redirect()->back();
 
     }
 }

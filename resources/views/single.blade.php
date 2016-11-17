@@ -34,9 +34,6 @@
 
 
 
-
-<!-- Zona de comentarios {{Auth::user()->id}} -->
-
 <div class="container">
 	<div class="col-xs-12 col-md-6">
 	    <form action="{{url('/comsuc')}}" accept-charset="UTF-8" method="POST">
