@@ -136,6 +136,10 @@ class additemController extends Controller{
 						
 
 						}
+						$imagen=new \App\Imagen;
+  						$imagen->nombre = "art_default.png";
+  						$imagen->articulo_id = $idarticulo;
+  						$imagen->save();
 
 			        }
 			    }
