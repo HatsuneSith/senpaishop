@@ -9,16 +9,13 @@
 					 <div class="flexslider">					
 						<div class="thumb-image"> <img src="../storage/app/articulos/{{$producto->id}}.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
 						</div>					 					 
-
 				 </div>	
 			     <div class="col-md-5 single-top-in simpleCart_shelfItem">
 					  <div class="single-para ">
 						 <h4> {{$producto->nombre}}</h4>							
 							<h5 class="item_price">$ {{$producto->precio}}</h5>							
 							<p class="para">{{$producto->descripcion}}</p>
-							
 						    </div>
-
 							<a href="#" class="add-cart item_add">ADD TO CART</a>							
 					 </div>
 				 </div>
@@ -35,7 +32,7 @@
 
 
 
-<!-- Zona de comentarios {{Auth::user()->id}} -->
+<!-- Zona de comentarios -->
 
 <div class="container">
 	<div class="col-xs-12 col-md-6">
@@ -87,8 +84,8 @@
                             <div class="col-xs-8 col-md-9">
                                 <div class="progress progress-striped">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                        <span class="sr-only">80%</span>
+                                        aria-valuemin="0" aria-valuemax="100" style="width: {{$hm5}}%">
+                                        <span class="sr-only">{{$hm5}}%</span>
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +96,8 @@
                             <div class="col-xs-8 col-md-9">
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                        <span class="sr-only">60%</span>
+                                        aria-valuemin="0" aria-valuemax="100" style="width: {{$hm4}}%">
+                                        <span class="sr-only">{{$hm4}}%</span>
                                     </div>
                                 </div>
                             </div>
@@ -111,8 +108,8 @@
                             <div class="col-xs-8 col-md-9">
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                        <span class="sr-only">40%</span>
+                                        aria-valuemin="0" aria-valuemax="100" style="width: {{$hm3}}%">
+                                        <span class="sr-only">{{$hm3}}%</span>
                                     </div>
                                 </div>
                             </div>
@@ -123,8 +120,8 @@
                             <div class="col-xs-8 col-md-9">
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                        <span class="sr-only">20%</span>
+                                        aria-valuemin="0" aria-valuemax="100" style="width: {{$hm2}}%">
+                                        <span class="sr-only">{{$hm2}}%</span>
                                     </div>
                                 </div>
                             </div>
@@ -135,8 +132,8 @@
                             <div class="col-xs-8 col-md-9">
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 15%">
-                                        <span class="sr-only">15%</span>
+                                        aria-valuemin="0" aria-valuemax="100" style="width: {{$hm1}}%">
+                                        <span class="sr-only">{{$hm1}}%</span>
                                     </div>
                                 </div>
                             </div>
@@ -153,80 +150,50 @@
 
 
 <!-- Comentarios Viejos -->
-
 <div class="row">
 	<div class="col-sm-7">
 		<hr/>
 		<div class="com_review-block">
-			<div class="row">
-				<div class="col-sm-3">
-					<img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-					<div class="com_review-block-name"><a href="#">nktailor</a></div>
-					<div class="com_review-block-date">January 29, 2016<br/>1 day ago</div>
-				</div>
-				<div class="col-sm-9">
-					<div class="com_review-block-rate">
-						<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-default com_btn-grey btn-xs" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-default com_btn-grey btn-xs" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</button>
-					</div>
-					<div class="com_review-block-title">this was nice in buy</div>
-					<div class="com_review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
-				</div>
-				
-			</div>
-			<img src="{{asset('img/babutton2.png')}}" alt="" id="" class="">
-			<img src="{{asset('img/babutton3.png')}}" alt="" id="" class="">
-			<hr/>
+			@foreach($rates as $rat)
+            <div class="row">
+                <div class="col-sm-3">
+                    <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                    <div class="com_review-block-name"><a href="#">nktailor</a></div>
+                    <div class="com_review-block-date">{{$rat->created_at}}</div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="com_review-block-rate">
+                        @if ($rat->rating > 0)
+                        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-1" class="">
+                        @endif
+                        @if ($rat->rating > 1)
+                        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-1" class="">
+                        @endif
+                        @if ($rat->rating > 2)
+                        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-1" class="">
+                        @endif
+                        @if ($rat->rating > 3)
+                        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-1" class="">
+                        @endif
+                        @if ($rat->rating > 4)
+                        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-1" class="">
+                        @endif
+                    </div>
+                    <div class="com_review-block-title">Review de {{$rat->rating}} bananas: </div>
+                    <div class="com_review-block-description">{{$rat->comentario}}</div>
+                </div>
+            </div>
+            @if (Auth::user()->rol->nombre === 'Cliente')
+            <form action="{{url('/delcom')}}" accept-charset="UTF-8" method="POST">
+                <input type="hidden" name="ComID" value="{{$rat->id}}">
+                <input type="image" src="{{asset('img/babutton2.png')}}" alt="Submit" id="" class="">
+            </form>
+            @endif
+            <hr/>
+			@endforeach
 			<!--Aqui se mueve el coso -->
-			<div class="row">
-				<div class="col-sm-3">
-					<img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-					<div class="com_review-block-name"><a href="#">nktailor</a></div>
-					<div class="com_review-block-date">January 29, 2016<br/>1 day ago</div>
-				</div>
-				<div class="col-sm-9">
-					<div class="com_review-block-rate">
-						<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-default com_btn-grey btn-xs" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-default com_btn-grey btn-xs" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</button>
-					</div>
-					<div class="com_review-block-title">this was nice in buy</div>
-					<div class="com_review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
-				</div>
-				
-			</div>
-			<img src="{{asset('img/babutton2.png')}}" alt="" id="" class="">
-			<img src="{{asset('img/babutton3.png')}}" alt="" id="" class="">
-			<hr/>
 		</div>
-		
 	</div>
-	
 </div>
 
 @stop

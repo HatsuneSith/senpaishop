@@ -71,17 +71,32 @@ class CategoriaController extends Controller
         $hm5 = 0;
 
         foreach ($rates as $rat) {
-        $maxrate = $maxrate +$rat->rating;
+        $maxrate = $maxrate +$rat->rating;  
         $counter = $counter + 1;
+        if ($rat->rating == 1){$hm1 = $hm1 + 1;}
+        if ($rat->rating == 2){$hm2 = $hm2 + 1;}
+        if ($rat->rating == 3){$hm3 = $hm3 + 1;}
+        if ($rat->rating == 4){$hm4 = $hm4 + 1;}
+        if ($rat->rating == 5){$hm5 = $hm5 + 1;}
         }
         if ($counter == 0){
             $maxrate = 0;
             $promedio = 0;
-            return view('single',compact('producto', 'maxrate', 'promedio'));
+            return view('single',compact('rates', 'producto', 'maxrate', 'promedio', 'hm1', 'hm2', 'hm3', 'hm4', 'hm5'));
         }
         $promedio = $maxrate / $counter;
+        $hm1 = ($hm1 / $counter)*100;
+        $hm2 = ($hm2 / $counter)*100;
+        $hm3 = ($hm3 / $counter)*100;
+        $hm4 = ($hm4 / $counter)*100;
+        $hm5 = ($hm5 / $counter)*100;
         $promedio = number_format($promedio, 1, '.', '');
-        return view('single',compact('producto', 'maxrate', 'promedio'));
+        $hm1 = number_format($hm1, 0, '.', '');
+        $hm2 = number_format($hm2, 0, '.', '');
+        $hm3 = number_format($hm3, 0, '.', '');
+        $hm4 = number_format($hm4, 0, '.', '');
+        $hm5 = number_format($hm5, 0, '.', '');
+        return view('single',compact('rates', 'producto', 'maxrate', 'promedio', 'hm1', 'hm2', 'hm3', 'hm4', 'hm5'));
     }
 
 
@@ -111,4 +126,16 @@ class CategoriaController extends Controller
         return Redirect('/single/1');
 
     }
+
+        public function comentariodelete(Request $datos){
+
+
+    public function eliminar($id){
+        proyectos::find($id)->delete();
+        return Redirect('/consultarProyectos');
+    }
+        return Redirect('/single/1');
+
+    }
+
 }
