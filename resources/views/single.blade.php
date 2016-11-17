@@ -158,7 +158,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <img src="{{asset('img/logo.png')}}" width="60" height="60">
-                    <div class="com_review-block-name"><a href="#">nktailor</a></div>
+                    <div class="com_review-block-name"><a href="#">{{$rat->usuario->nombre}}</a></div>
                     <div class="com_review-block-date">{{$rat->created_at}}</div>
                 </div>
                 <div class="col-sm-9">

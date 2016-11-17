@@ -25,6 +25,15 @@ class GeneralController extends Controller
     	}    	
     }
 
+    public function mIndex(){      
+              
+        return view('Index');
+    }
+
+
+
+
+
     public function index()
     {
         $articulos = DB::table('articulos')
@@ -38,4 +47,5 @@ class GeneralController extends Controller
 
         return view('index', compact('articulos'));
     }
+
 }
