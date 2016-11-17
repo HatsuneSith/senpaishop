@@ -59,10 +59,11 @@ class CategoriaController extends Controller
         $comentario->comentario=$datos->input('comment');
         $comentario->rating=$datos->input('bananas');
         $comentario->usuario_id=$datos->input('UseID');
-        $comentario->articulo_id=$datos->input('artID');
+        $comentario->articulo_id=$datos->input('ArtID');
+        $yes=$datos->input('ArtID');
         $comentario->save();
 
-        return Redirect('/single/1');
+        return Redirect('/');
 
     }
 }
