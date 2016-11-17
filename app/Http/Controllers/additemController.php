@@ -127,7 +127,7 @@ class additemController extends Controller{
 							$idcategoria = 
 								DB::table('sub_categorias')->
 								select('id')->where('nombre', '=', $subc)->get();
-
+							echo $idcategoria."  ";
 
 							if(count($idcategoria) == 0) {
 								break;
@@ -139,6 +139,10 @@ class additemController extends Controller{
 						
 
 						}
+						$imagen=new \App\Imagen;
+  						$imagen->nombre = "art_default.png";
+  						$imagen->articulo_id = $idarticulo;
+  						$imagen->save();
 
 			        }
 			    }
