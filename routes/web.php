@@ -11,7 +11,11 @@
 |
 */
 
+<<<<<<< HEAD
 
+=======
+Route::get('/', 'GeneralController@index');
+>>>>>>> 9294984fe9b4cf9dd0f0a2fec236338f1064afb8
 
 Auth::routes();
 
@@ -33,6 +37,8 @@ Route::post('/agregar-articulo-individual/', 'additemController@mAgregar_Item');
 Route::post('/upload', 'additemController@mAdd');
 
 Route::get('/product/{cat_id}', 'CategoriaController@productos_categoria');
+Route::get('/product/{cat_id}/filtro', 'CategoriaController@productos_categoria_filtro');
 Route::get('/single/{art_id}', 'CategoriaController@producto');
 Route::get('/inventario', 'CategoriaController@inventario');
 Route::post('/comsuc', 'CategoriaController@comentariosuccess');
+Route::post('/delcom', 'CategoriaController@comentariodelete');

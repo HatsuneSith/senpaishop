@@ -12,6 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- Custom Theme files -->
 <!--theme style-->
 <link href="{{asset("css/style.css")}}" rel="stylesheet" type="text/css" media="all" />	
+<link href="{{asset("css/memenu.css")}}" rel="stylesheet" type="text/css" media="all" />
 <link href="{{asset("css/custom.css")}}" rel="stylesheet" type="text/css" media="all" />
 <!--//theme style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,18 +22,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body> 
 <!--header-->	
-<script src="{{asset("js/responsiveslides.min.js")}}"></script>
-<script>  
-    $(function () {
-      $("#slider").responsiveSlides({
-      	auto: true,
-      	nav: true,
-      	speed: 500,
-        namespace: "callbacks",
-        pager: false,
-      });
-    });
-  </script>
+
 <div class="header-top">
 	<div class="header-bottom">			
 		<div class="logo">
@@ -41,7 +31,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		 <!---->		 
 		 <div class="top-nav">
 			<ul class="memenu skyblue">				
-				<li class="grid"><a href="#">Categorias</a>
+				<li class="grid"><a href="#">Artículos</a>
 					<div class="mepanel">
 						<div class="row">
 							@foreach($categorias as $categoria)
@@ -49,7 +39,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<h4>{{ $categoria->nombre }}</h4>
 									<ul>
 										@foreach($categoria->sub_categorias as $sc)
-											<li><a href="">{{ $sc->nombre }}</a></li>
+											<li><a href="{{ url('/product') }}/{{ $sc->id }}">{{ $sc->nombre }}</a></li>
 										@endforeach
 									</ul>
 								</div>
@@ -63,7 +53,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				@else
 					<li class="grid"><a href="">Panel</a></li>
 					@if(Auth::user()->rol->nombre == 'Admin')
-						<li class="grid"><a href="">Administrar</a></li>
+						<li class="grid"><a href="#">Administrar</a>
+							<div class="mepanel">
+								<div class="row">
+									<div class="col1 me-one">										
+										<a href="{{ url('/agregar-articulo') }}"><h4>Dar de alta articulo</h4></a>
+										<a href="{{ url('/inventario') }}"><h4>Inventario</h4></a>
+									</div>
+								</div>
+							</div>
+						</li>							
 					@endif
 					<li>
 	                    <a href="{{ url('/logout') }}"
@@ -159,17 +158,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	 </div>
 </div>
 
-<script src="{{asset("js/jquery.min.js")}}"></script>
-<script src="{{asset("js/bootstrap.js")}}"></script>
+<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- start menu -->
 <script src="{{asset("js/simpleCart.min.js")}}"> </script>
 <!-- start menu -->
-<link href="{{asset("css/memenu.css")}}" rel="stylesheet" type="text/css" media="all" />
 <script>$(document).ready(function(){$(".memenu").memenu();});</script>	
 <!-- /start menu -->
 <script src="{{asset("js/memenu.js")}}"></script>
 <script src="{{asset("js/custom.js")}}"></script>
 <!---->
+<script src="{{asset("js/responsiveslides.min.js")}}"></script>
+<script>  
+    $(function () {
+      $("#slider").responsiveSlides({
+      	auto: true,
+      	nav: true,
+      	speed: 500,
+        namespace: "callbacks",
+        pager: false,
+      });
+    });
+  </script>
+  @yield('scripts')
 </body>
 </html>
