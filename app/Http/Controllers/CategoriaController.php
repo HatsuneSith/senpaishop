@@ -40,14 +40,25 @@ class CategoriaController extends Controller
 
     public function producto($art_id){
         $rates=DB::table('valoraciones')->where('valoraciones.articulo_id', '=', $art_id)->get();
+        $producto = Articulo::find($art_id);
         $maxrate = 0;
         $counter =0;
+        $hm1 = 0;
+        $hm2 = 0;
+        $hm3 = 0;
+        $hm4 = 0;
+        $hm5 = 0;
+
         foreach ($rates as $rat) {
         $maxrate = $maxrate +$rat->rating;
         $counter = $counter + 1;
         }
+        if ($counter == 0){
+            $maxrate = 0;
+            $promedio = 0;
+            return view('single',compact('producto', 'maxrate', 'promedio'));
+        }
         $promedio = $maxrate / $counter;
-    	$producto = Articulo::find($art_id);
         $promedio = number_format($promedio, 1, '.', '');
         return view('single',compact('producto', 'maxrate', 'promedio'));
     }
