@@ -10,6 +10,7 @@ use App\Imagen;
 use App\Valoracion;
 use App\subcategoria_articulo;
 use DB;
+use Auth;
 
 class CategoriaController extends Controller
 {
@@ -38,10 +39,17 @@ class CategoriaController extends Controller
 
 
     public function producto($art_id){
-
-
-    	$producto=Articulo::find($art_id);
-        return view('single',compact('producto'));
+        $rates=DB::table('valoraciones')->where('valoraciones.articulo_id', '=', $art_id)->get();
+        $maxrate = 0;
+        $counter =0;
+        foreach ($rates as $rat) {
+        $maxrate = $maxrate +$rat->rating;
+        $counter = $counter + 1;
+        }
+        $promedio = $maxrate / $counter;
+    	$producto = Articulo::find($art_id);
+        $promedio = number_format($promedio, 1, '.', '');
+        return view('single',compact('producto', 'maxrate', 'promedio'));
     }
 
 
@@ -55,15 +63,16 @@ class CategoriaController extends Controller
 
     public function comentariosuccess(Request $datos){
 
+
         $comentario= new Valoracion;
         $comentario->comentario=$datos->input('comment');
         $comentario->rating=$datos->input('bananas');
-        $comentario->usuario_id=$datos->input('UseID');
+        $comentario->usuario_id=Auth::user()->id;
         $comentario->articulo_id=$datos->input('ArtID');
         $yes=$datos->input('ArtID');
         $comentario->save();
 
-        return Redirect('/');
+        return Redirect('/single/1');
 
     }
 }
