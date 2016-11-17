@@ -11,11 +11,8 @@
 |
 */
 
-<<<<<<< HEAD
-
-=======
 Route::get('/', 'GeneralController@index');
->>>>>>> 9294984fe9b4cf9dd0f0a2fec236338f1064afb8
+
 
 Auth::routes();
 
@@ -27,7 +24,7 @@ Route::get('/confirmacion/{email}/{codigo}', 'GeneralController@confirmar_cuenta
 
 
 
-Route::get('/', 'GeneralController@mIndex');
+
 Route::get('/agregar-articulo', 'additemController@mVista');
 Route::get('/buscar-articulo', 'additemController@mBuscarArticulo');
 Route::get('/buscar-articulo2', 'additemController@mBuscarArticulo2');
