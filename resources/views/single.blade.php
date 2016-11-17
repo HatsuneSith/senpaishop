@@ -32,6 +32,7 @@
 
 
 
+
 <!-- Zona de comentarios -->
 
 <div class="container">
@@ -157,7 +158,7 @@
 			@foreach($rates as $rat)
             <div class="row">
                 <div class="col-sm-3">
-                    <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                    <img src="{{asset('img/logo.png')}}" width="60" height="60">
                     <div class="com_review-block-name"><a href="#">nktailor</a></div>
                     <div class="com_review-block-date">{{$rat->created_at}}</div>
                 </div>
@@ -183,9 +184,10 @@
                     <div class="com_review-block-description">{{$rat->comentario}}</div>
                 </div>
             </div>
-            @if (Auth::user()->rol->nombre === 'Cliente')
+            @if (Auth::user()->rol->nombre === 'Admin')
             <form action="{{url('/delcom')}}" accept-charset="UTF-8" method="POST">
                 <input type="hidden" name="ComID" value="{{$rat->id}}">
+                <input type="hidden" name="_token" value="{{csrf_token() }}">
                 <input type="image" src="{{asset('img/babutton2.png')}}" alt="Submit" id="" class="">
             </form>
             @endif

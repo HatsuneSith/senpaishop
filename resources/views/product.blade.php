@@ -46,7 +46,7 @@
 							<div class="single-bottom">									 
 								@foreach($sub_categorias as $subcat)
 									@if($cat->id == $subcat->categoria_id)
-										<a href="../product/{{$subcat->id}}"><p>{{$subcat->nombre}}</p></a>
+										<a href="{{ url('product') }}/{{$subcat->id}}"><p>{{$subcat->nombre}}</p></a>
 									@endif	
 								@endforeach								
 						    </div>					      	

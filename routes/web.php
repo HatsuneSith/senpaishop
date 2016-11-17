@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');    
-});
+Route::get('/', 'GeneralController@index');
 
 Auth::routes();
 
@@ -36,4 +34,4 @@ Route::get('/product/{cat_id}/filtro', 'CategoriaController@productos_categoria_
 Route::get('/single/{art_id}', 'CategoriaController@producto');
 Route::get('/inventario', 'CategoriaController@inventario');
 Route::post('/comsuc', 'CategoriaController@comentariosuccess');
-Route::post('/delcom', 'CategoriaController@comentariodelete')
+Route::post('/delcom', 'CategoriaController@comentariodelete');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Usuario;
+use DB;
 
 class GeneralController extends Controller
 {
@@ -22,5 +23,19 @@ class GeneralController extends Controller
     	else {
     		return "fail";
     	}    	
+    }
+
+    public function index()
+    {
+        $articulos = DB::table('articulos')
+            ->join('valoraciones','valoraciones.articulo_id', 'articulos.id')
+            ->select('articulos.nombre', 'articulos.id', 'articulos.precio', DB::raw('COUNT(valoraciones.rating) as rating'))
+            ->groupBy('articulos.nombre')
+            ->groupBy('articulos.id')
+            ->groupBy('articulos.precio')
+            ->take(9)
+            ->get();
+
+        return view('index', compact('articulos'));
     }
 }

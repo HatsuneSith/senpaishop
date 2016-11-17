@@ -123,18 +123,14 @@ class CategoriaController extends Controller
         $yes=$datos->input('ArtID');
         $comentario->save();
 
-        return Redirect('/single/1');
+        return redirect()->back();
 
     }
 
         public function comentariodelete(Request $datos){
 
-
-    public function eliminar($id){
-        proyectos::find($id)->delete();
-        return Redirect('/consultarProyectos');
-    }
-        return Redirect('/single/1');
+        Valoracion::find($datos->input('ComID'))->delete();
+        return redirect()->back();
 
     }
 
