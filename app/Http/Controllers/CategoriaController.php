@@ -11,7 +11,6 @@ use App\Imagen;
 use App\Valoracion;
 use App\subcategoria_articulo;
 use DB;
-use Auth;
 
 class CategoriaController extends Controller
 {

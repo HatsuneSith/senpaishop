@@ -64,10 +64,10 @@
 					<h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Ordenar</h4>
 					<div class="row row1 scroll-pane">						 
 						<div class="col col-4">
-							<label class="radio"><input type="radio" id="asc_1" checked>Nombre (ascendente)</label>
-							<label class="radio"><input type="radio" id="asc_2">Nombre (descendente)</label>
-							<label class="radio"><input type="radio" id="asc_3">Precio (ascendente)</label>
-							<label class="radio"><input type="radio" id="asc_4">Precio (descendente)</label>
+							<label class="radio"><input type="radio" name="filtro" id="asc_1" checked>Nombre (ascendente)</label>
+							<label class="radio"><input type="radio" name="filtro" id="asc_2">Nombre (descendente)</label>
+							<label class="radio"><input type="radio" name="filtro" id="asc_3">Precio (ascendente)</label>
+							<label class="radio"><input type="radio" name="filtro" id="asc_4">Precio (descendente)</label>
 						</div>
 					</div>
 				</section>
@@ -138,7 +138,7 @@
 				by = 'precio';
 			}
 			else {
-				order = 'asc';
+				order = 'desc';
 				by = 'precio';
 			}
 			
