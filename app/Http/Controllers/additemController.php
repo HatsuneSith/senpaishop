@@ -129,6 +129,9 @@ class additemController extends Controller{
 								select('id')->where('nombre', '=', $subc)->get();
 
 
+							if(count($idcategoria) == 0) {
+								break;
+							}
 							$SubCre = new \App\SubCategoria_Articulo;
 							$SubCre->sub_categoria_id = $idcategoria[0]->id;
 							$SubCre->articulo_id = $idarticulo;

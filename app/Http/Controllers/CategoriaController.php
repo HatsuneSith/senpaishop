@@ -60,7 +60,7 @@ class CategoriaController extends Controller
     }
 
     public function producto($art_id){
-        $rates=DB::table('valoraciones')->where('valoraciones.articulo_id', '=', $art_id)->get();
+        $rates=Valoracion::where('articulo_id',$art_id)->get();        
         $producto = Articulo::find($art_id);
         $maxrate = 0;
         $counter =0;

@@ -38,7 +38,7 @@
 	 <div class="container">
 		 <div class="items-sec">
 		 	@foreach($articulos as $articulo)
-				<div class="col-md-3 feature-grid">
+				<div class="col-md-4 feature-grid">
 					<a href="{{ url('/single') }}/{{$articulo->id}}"><img src="{{asset("img/img1.jpg")}}" alt=""/>		
 						<div class="arrival-info">
 							<h4>{{$articulo->nombre}}</h4>
