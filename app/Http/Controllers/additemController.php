@@ -13,6 +13,7 @@ class additemController extends Controller{
 	public function mAgregar_Item(Request $request) {
 
 		$item = new \App\Articulo;
+		
 		$item ->nombre =$request->input('nombre');
 		$item ->cantidad =$request->input('cantidad');
 		$item ->precio =$request->input('precio');
@@ -28,7 +29,15 @@ class additemController extends Controller{
 			$SubCre->articulo_id = $item->id;
 			$SubCre->save();
 		}
-  	
+
+		$input =$request->file('avatar');
+		$imgname =$request->input('imgn');
+  		$input->storeAs('articulos/'. $item->id, $imgname.'.png');
+
+  		$imagen=new \App\Imagen;
+  		$imagen->nombre = $imgname;
+  		$imagen->articulo_id = $item->id;
+  		$imagen->save();
 	}
 	public function mBuscarArticulo(Request $request) {
 		$input = $request->all();
@@ -42,16 +51,6 @@ class additemController extends Controller{
 		return view('additemView', compact('item_elim','articulos') );
   	
 	}
-
-
-
-
-
-
-
-
-
-
 
 	public function mBuscarArticulo2(Request $request) {
 		$input = $request->all();
@@ -78,16 +77,6 @@ class additemController extends Controller{
 		}
 
 	}
-
-
-
-
-
-
-
-
-
-
 
 	public function mElimiarSubCat_Item(Request $request) {
 		$input = $request->all();

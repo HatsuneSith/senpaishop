@@ -8,8 +8,10 @@ use App\Articulo;
 use App\Categoria;
 use App\SubCategoria;
 use App\Imagen;
+use App\Valoracion;
 use App\subcategoria_articulo;
 use DB;
+use Auth;
 
 class CategoriaController extends Controller
 {
@@ -58,12 +60,18 @@ class CategoriaController extends Controller
         return view('product', compact('productos', 'categorias', 'sub_categorias', 'cat_id'));
     }
 
-
     public function producto($art_id){
-        
-        
-        $producto=Articulo::find($art_id);
-        return view('single',compact('producto'));
+        $rates=DB::table('valoraciones')->where('valoraciones.articulo_id', '=', $art_id)->get();
+        $maxrate = 0;
+        $counter =0;
+        foreach ($rates as $rat) {
+        $maxrate = $maxrate +$rat->rating;
+        $counter = $counter + 1;
+        }
+        $promedio = $maxrate / $counter;
+    	$producto = Articulo::find($art_id);
+        $promedio = number_format($promedio, 1, '.', '');
+        return view('single',compact('producto', 'maxrate', 'promedio'));
     }
 
 
@@ -76,5 +84,21 @@ class CategoriaController extends Controller
 
         $productos=DB::table('articulos')->paginate(10);
         return view('inventario',compact('productos'));
+    }
+
+
+    public function comentariosuccess(Request $datos){
+
+
+        $comentario= new Valoracion;
+        $comentario->comentario=$datos->input('comment');
+        $comentario->rating=$datos->input('bananas');
+        $comentario->usuario_id=Auth::user()->id;
+        $comentario->articulo_id=$datos->input('ArtID');
+        $yes=$datos->input('ArtID');
+        $comentario->save();
+
+        return Redirect('/single/1');
+
     }
 }

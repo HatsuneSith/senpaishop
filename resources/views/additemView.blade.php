@@ -41,7 +41,7 @@
 	<h2 class="csv-fix-h2">CSV Upload</h1>
 	<form method="POST" action="/senpaishop/public/upload" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-		<input id="uploadFile" placeholder="Choose File" disabled="disabled" />
+
 
 
 		<div class="fileUpload btn btn-primary">
@@ -123,12 +123,12 @@
 	?>
 </div>
 
-<div class="categorias-item-fix">
-	<h2 class="categorias-item-fix-h2">Agregar un Articulo</h1>
-	<div class="row">
-		
-		<form  class="form-horizontal "  action="senpaishop/public/agregar-articulo-individual/" method="get">
-		<div class="col-lg-10">
+
+<div class="csv-fix">
+	<h2 class="csv-fix-h2">Agregar un Articulo</h1>
+	<form method="POST" action="/senpaishop/public/agregar-articulo-individual" enctype="multipart/form-data">
+		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+
 			<p>Nombre:</p>
 			<input type="text"  class="form-control"  name="nombre">
 			<br>
@@ -140,14 +140,23 @@
 			<input type="text" class="form-control" name="descripcion">
 			<p>SubCategorias:</p>
 			<input type="text" class="form-control" name="subc">
+			<p>Nombre Imagen:</p>
+			<input type="text" class="form-control" name="imgn">
 			<br>
-			<button type="reset" class="btn btn-default">Cancel</button>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		       
-		</form>
+
+
+		<div class="fileUpload btn btn-primary">
+		    <span>Upload</span>
+		    <input  id="uploadBtn" type="file" class="upload" name="avatar">
 		</div>
-		</div>
-	</div>
+
+
+		
+		<button class="csv-fix-bt btn btn-primary" type="submit">Enviar</button>
+	</form>
+</div>
+
+
 	<div class="contenedor categorias-item-fix" >
 		<h2 class="categorias-item-fix-h2">Eliminar Categoria de Articulo</h1>
 		<div class="row">

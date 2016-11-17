@@ -35,10 +35,13 @@
 
 
 
-<!-- Zona de comentarios -->
+<!-- Zona de comentarios {{Auth::user()->id}} -->
+
 <div class="container">
 	<div class="col-xs-12 col-md-6">
-	    <form accept-charset="UTF-8" action="" method="post">
+	    <form action="{{url('/comsuc')}}" accept-charset="UTF-8" method="POST">
+	        <input type="hidden" name="ArtID" value="{{$producto->id}}">
+	        <input type="hidden" name="_token" value="{{csrf_token() }}">
 	        <span>Este articulo se merece </span>
 	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-1" class="">
 	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-2" class="">
@@ -47,13 +50,14 @@
 	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-5" class="hidden">
 	        <span> Bananas.</span>
 	        <input id="banana-range" type="range" name="bananas" min="1" max="5" oninput="bananas(this.value)" onchange="bananas(this.value)">
-	        <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Escribe un comentario..." rows="5"></textarea>
+	        <textarea class="form-control animated" cols="50" id="new-review" maxlength="250" name="comment" placeholder="Escribe un comentario..." rows="5"></textarea>
 	        <div class="text-right">
-	            <input type="image" src="{{asset('img/babutton1.png')}}" alt="Submit" width="60" height="60">
+	        	<input type="image" src="{{asset('img/babutton1.png')}}" alt="Submit" width="60" height="60">
 	        </div>
 	    </form>
 	</div>
 </div>
+
 
 
 
@@ -69,9 +73,9 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-6 text-center">
                         <h1 class="rating-num">
-                            4.0</h1>
+                            {{$promedio}}</h1>
                         <div>
-                            Total: <span>1,050,008 </span>
+                            Total: <span>{{$maxrate}} </span>
                             <img src="{{asset('img/banana.png')}}" alt="" id="" class="">
                         </div>
                     </div>
