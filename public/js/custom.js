@@ -1,7 +1,3 @@
-
-
-
-
 // JS para los comentarios y las puntuaciones de los articulos:
 
 $("#banana-range").val(3);
@@ -15,7 +11,6 @@ $("#banana-range").on('input change', function() {
 	}	
 
 	for (j=bananas+1; j < 6; j++) {
-		$("#banana-" + j).addClass('hidden');
-		console.log("Wat");
+		$("#banana-" + j).addClass('hidden');		
 	}	
 });

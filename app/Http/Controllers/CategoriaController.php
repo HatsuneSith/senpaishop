@@ -21,26 +21,48 @@ class CategoriaController extends Controller
 
 
 
-    	$productos=DB::table('subcategoria_articulo')
+        $productos=DB::table('subcategoria_articulo')
             ->join('articulos','subcategoria_articulo.articulo_id','=','articulos.id')
             ->join('sub_categorias','subcategoria_articulo.sub_categoria_id','=','sub_categorias.id')
-        	->where('sub_categorias.id', '=', $cat_id)
+            ->where('sub_categorias.id', '=', $cat_id)
             ->select('articulos.id','articulos.nombre','articulos.cantidad','articulos.precio','articulos.descripcion')
-        	->get();
+            ->get();
 
 
         $categorias=Categoria::all();  
         $sub_categorias=SubCategoria::all(); 
 
-        return view('product',compact('productos','categorias','sub_categorias'));
+        return view('product',compact('productos','categorias','sub_categorias', 'cat_id'));
     }
 
+    public function productos_categoria_filtro(Request $request, $cat_id)
+    {
+        $precio_menor = $request->input('precio_min');
+        $precio_mayor = $request->input('precio_max');
+        $order = $request->input('order');
+        $by = $request->input('by');      
+
+        $productos=DB::table('subcategoria_articulo')
+            ->join('articulos','subcategoria_articulo.articulo_id','=','articulos.id')
+            ->join('sub_categorias','subcategoria_articulo.sub_categoria_id','=','sub_categorias.id')
+            ->where('sub_categorias.id', '=', $cat_id)
+            ->where('articulos.precio', '>=', $precio_menor)
+            ->where('articulos.precio', '<=', $precio_mayor)
+            ->select('articulos.id','articulos.nombre','articulos.cantidad','articulos.precio','articulos.descripcion')
+            ->orderBy($by, $order)
+            ->get();
+
+        $categorias = Categoria::all();
+        $sub_categorias = SubCategoria::all();
+
+        return view('product', compact('productos', 'categorias', 'sub_categorias', 'cat_id'));
+    }
 
 
     public function producto($art_id){
         
         
-    	$producto=Articulo::find($art_id);
+        $producto=Articulo::find($art_id);
         return view('single',compact('producto'));
     }
 

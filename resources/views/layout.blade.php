@@ -12,6 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- Custom Theme files -->
 <!--theme style-->
 <link href="{{asset("css/style.css")}}" rel="stylesheet" type="text/css" media="all" />	
+<link href="{{asset("css/memenu.css")}}" rel="stylesheet" type="text/css" media="all" />
 <link href="{{asset("css/custom.css")}}" rel="stylesheet" type="text/css" media="all" />
 <!--//theme style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -157,13 +158,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	 </div>
 </div>
 
-<script src="{{asset("js/jquery.min.js")}}"></script>
-<script src="{{asset("js/bootstrap.js")}}"></script>
+<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- start menu -->
 <script src="{{asset("js/simpleCart.min.js")}}"> </script>
 <!-- start menu -->
-<link href="{{asset("css/memenu.css")}}" rel="stylesheet" type="text/css" media="all" />
 <script>$(document).ready(function(){$(".memenu").memenu();});</script>	
 <!-- /start menu -->
 <script src="{{asset("js/memenu.js")}}"></script>
@@ -181,5 +181,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       });
     });
   </script>
+  @yield('scripts')
 </body>
 </html>
