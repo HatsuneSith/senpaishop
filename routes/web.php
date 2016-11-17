@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {	
+Route::get('/', function () {
     return view('index');    
 });
 
@@ -28,7 +28,7 @@ Route::get('/buscar-articulo', 'additemController@mBuscarArticulo');
 Route::get('/buscar-articulo2', 'additemController@mBuscarArticulo2');
 Route::get('/eliminar-subcategoria/', 'additemController@mElimiarSubCat_Item');
 Route::get('/agregar-subcategoria/', 'additemController@mAgregarSubCat_Item');
-Route::get('/agregar-articulo-individual/', 'additemController@mAgregar_Item');
+Route::post('/agregar-articulo-individual/', 'additemController@mAgregar_Item');
 Route::post('/upload', 'additemController@mAdd');
 
 Route::get('/product/{cat_id}', 'CategoriaController@productos_categoria');
