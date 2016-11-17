@@ -7,6 +7,7 @@ use App\Articulo;
 use App\Categoria;
 use App\SubCategoria;
 use App\Imagen;
+use App\Valoracion;
 use App\subcategoria_articulo;
 use DB;
 
@@ -49,5 +50,19 @@ class CategoriaController extends Controller
 
         $productos=DB::table('articulos')->paginate(10);
         return view('inventario',compact('productos'));
+    }
+
+
+    public function comentariosuccess(Request $datos){
+
+        $comentario= new Valoracion;
+        $comentario->comentario=$datos->input('comment');
+        $comentario->rating=$datos->input('bananas');
+        $comentario->usuario_id=$datos->input('UseID');
+        $comentario->articulo_id=$datos->input('artID');
+        $comentario->save();
+
+        return Redirect('/single/1');
+
     }
 }

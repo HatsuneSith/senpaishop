@@ -38,7 +38,10 @@
 <!-- Zona de comentarios -->
 <div class="container">
 	<div class="col-xs-12 col-md-6">
-	    <form accept-charset="UTF-8" action="" method="post">
+	    <form action="{{url('/comsuc')}}" accept-charset="UTF-8" method="POST">
+	        <input type="hidden" name="artID" value="{{$producto->id}}">
+	        <input type="hidden" name="UseID" value="{{ Auth::user()->rol->id }}">
+	        <input type="hidden" name="_token" value="{{csrf_token() }}">
 	        <span>Este articulo se merece </span>
 	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-1" class="">
 	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-2" class="">
