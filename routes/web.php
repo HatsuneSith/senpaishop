@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');    
-});
+
 
 Auth::routes();
 
@@ -23,6 +21,9 @@ Route::get('/mail', 'HomeController@mail');
 
 Route::get('/confirmacion/{email}/{codigo}', 'GeneralController@confirmar_cuenta');
 
+
+
+Route::get('/', 'GeneralController@mIndex');
 Route::get('/agregar-articulo', 'additemController@mVista');
 Route::get('/buscar-articulo', 'additemController@mBuscarArticulo');
 Route::get('/buscar-articulo2', 'additemController@mBuscarArticulo2');

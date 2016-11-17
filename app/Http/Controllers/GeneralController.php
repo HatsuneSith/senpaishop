@@ -23,4 +23,11 @@ class GeneralController extends Controller
     		return "fail";
     	}    	
     }
+    public function mIndex(){      
+              
+        return view('Index');
+    }
+
+
+
 }

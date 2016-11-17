@@ -125,7 +125,7 @@ class additemController extends Controller{
 							$idcategoria = 
 								DB::table('sub_categorias')->
 								select('id')->where('nombre', '=', $subc)->get();
-
+							echo $idcategoria."  ";
 
 							$SubCre = new \App\SubCategoria_Articulo;
 							$SubCre->sub_categoria_id = $idcategoria[0]->id;

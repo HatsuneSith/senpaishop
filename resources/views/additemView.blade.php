@@ -39,15 +39,14 @@
 
 
 		<div class="fileUpload btn btn-primary">
-		    <span>Upload</span>
+		    <span>Seleccionar CSV</span>
 		    <input  id="uploadBtn" type="file" class="upload" name="avatar">
 		</div>
-
-
 		
 		<button class="csv-fix-bt btn btn-primary" type="submit">Enviar</button>
 	</form>
 </div>
+
 
 <div class="contenedor categorias-item-fix" >
 	<h2 class="categorias-item-fix-h2">Eliminar Categoria de Articulo</h1>
@@ -62,11 +61,11 @@
 					    <option value="{{$articulo->id}}: {{$articulo->nombre}}">				    
 					   @endforeach
 				  </datalist>
-
+				  <img src="">
 				  </div>
 				  <div class="col-lg-10 col-lg-offset-2">
-			        <button type="reset" class="btn btn-default">Cancel</button>
-			        <button type="submit" class="btn btn-primary">Submit</button>
+			        <button type="reset" class="btn btn-default">Cancelar</button>
+			        <button type="submit" class="btn btn-primary">Seleccionar</button>
 			      </div>
 		      </form>
 		
@@ -140,7 +139,7 @@
 
 
 		<div class="fileUpload btn btn-primary">
-		    <span>Upload</span>
+		    <span>Imagen</span>
 		    <input  id="uploadBtn" type="file" class="upload" name="avatar">
 		</div>
 
@@ -152,7 +151,7 @@
 
 
 	<div class="contenedor categorias-item-fix" >
-		<h2 class="categorias-item-fix-h2">Eliminar Categoria de Articulo</h1>
+		<h2 class="categorias-item-fix-h2">Agregar Categoria a un Articulo</h1>
 		<div class="row">
 		
 				<form  class="form-horizontal" action="/senpaishop/public/buscar-articulo2" method="get">
@@ -167,8 +166,8 @@
 
 					  </div>
 					  <div class="col-lg-10 col-lg-offset-2">
-				        <button type="reset" class="btn btn-default">Cancel</button>
-				        <button type="submit" class="btn btn-primary">Submit</button>
+				        <button type="reset" class="btn btn-default">Cancelar</button>
+				        <button type="submit" class="btn btn-primary">Seleccionar</button>
 				      </div>
 			      </form>
 			
