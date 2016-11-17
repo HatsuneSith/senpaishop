@@ -7,8 +7,11 @@
 			 <div class="top-sing">
 				  <div class="col-md-7 single-top">	
 					 <div class="flexslider">					
-						<div class="thumb-image"> <img src="../storage/app/articulos/{{$producto->id}}.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
-						</div>					 					 
+						<div class="thumb-image">
+                            @foreach ($producto->imagenes as $imga)      
+                            <img src="{{ asset('../storage/app/articulos')}}/{{$producto->id}}/{{$imga->nombre}}.png" >
+                            @endforeach
+                        </div>					 					 
 				 </div>	
 			     <div class="col-md-5 single-top-in simpleCart_shelfItem">
 					  <div class="single-para ">
@@ -25,10 +28,6 @@
 
 	 </div>
 </div>
-
-
-
-
 
 
 
