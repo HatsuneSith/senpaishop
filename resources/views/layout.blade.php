@@ -51,7 +51,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<li class="grid"><a href="{{ url('/login') }}">Login</a></li>
                     <li class="grid"><a href="{{ url('/register') }}">Registrar</a></li>
 				@else
-					<li class="grid"><a href="">Panel</a></li>
+					<li class="grid"><a href="">Panel</a>
+						<div class="mepanel">
+							<div class="row">
+								<div class="col1 me-one">
+									<a href="{{ url('/compras') }}"><h4>Compras</h4></a>
+								</div>
+							</div>
+						</div>
+					</li>
 					@if(Auth::user()->rol->nombre == 'Admin')
 						<li class="grid"><a href="#">Administrar</a>
 							<div class="mepanel">
@@ -59,10 +67,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="col1 me-one">										
 										<a href="{{ url('/agregar-articulo') }}"><h4>Dar de alta articulo</h4></a>
 										<a href="{{ url('/inventario') }}"><h4>Inventario</h4></a>
+										<a href="{{ url('/ventas') }}"><h4>Ventas</h4></a>
 									</div>
 								</div>
 							</div>
-						</li>							
+						</li>						
 					@endif
 					<li>
 	                    <a href="{{ url('/logout') }}"
@@ -79,7 +88,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</ul>
 			<div class="clearfix"> </div>
 		 </div>
-		 <!---->
+		<!---
 		@if(Auth::check())
 			<div class="cart box_1">		
 				<a href="checkout.html">
@@ -92,6 +101,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			 	<div class="clearfix"> </div>
 			</div>
 		@endif
+		-->
 		<div class="clearfix"> 
 		</div>
 	</div>
@@ -105,37 +115,36 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	 <div class="container">
 		 <div class="footer-grids">
 			 <div class="col-md-3 about-us">
-				 <h3>About Us</h3>
-				 <p>Maecenas nec auctor sem. Vivamus porttitor tincidunt elementum nisi a, euismod rhoncus urna. Curabitur scelerisque vulputate arcu eu pulvinar. Fusce vel neque diam</p>
+				 <h3>About Bananas</h3>
+				 <p>The banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa.</p>
 			 </div>
 			 <div class="col-md-3 ftr-grid">
-					<h3>Information</h3>
+					<h3>Senpai Club Network</h3>
 					<ul class="nav-bottom">
-						<li><a href="#">Track Order</a></li>
-						<li><a href="#">New Products</a></li>
-						<li><a href="#">Location</a></li>
-						<li><a href="#">Our Stores</a></li>
-						<li><a href="#">Best Sellers</a></li>	
+						<li><a href="#">Hey</a></li>
+						<li><a href="#">We are</a></li>
+						<li><a href="#">Senpai Club</a></li>
+						<li><a href="#">Helping our dear kohais</a></li>
+						<li><a href="#">In problems</a></li>	
 					</ul>					
 			 </div>
 			 <div class="col-md-3 ftr-grid">
-					<h3>More Info</h3>
+					<h3>Marcas</h3>
 					<ul class="nav-bottom">
-						<li><a href="login.html">Login</a></li>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="contact.html">Contact</a></li>
-						<li><a href="#">Shipping</a></li>
-						<li><a href="#">Membership</a></li>	
+						<li><a href="#">Good Smile</a></li>
+						<li><a href="#">Namco</a></li>
+						<li><a href="#">Black Monster</a></li>
+						<li><a href="#">Shonen Jump</a></li>
+						<li><a href="#">Mercado Garmendia</a></li>	
 					</ul>					
 			 </div>
 			 <div class="col-md-3 ftr-grid">
-					<h3>Categories</h3>
+					<h3>Integrantes</h3>
 					<ul class="nav-bottom">
-						<li><a href="#">Car Lights</a></li>
-						<li><a href="#">LED Lights</a></li>
-						<li><a href="#">Decorates</a></li>
-						<li><a href="#">Wall Lights</a></li>
-						<li><a href="#">Protectors</a></li>	
+						<li><a href="#">Lopez Lugo Erik</a></li>
+						<li><a href="#">Marquez Barraza Luis Arturo</a></li>
+						<li><a href="#">Ojeda Martinez Betillo</a></li>
+						<li><a href="#">Silva Alfaro Hugo Cesar</a></li>
 					</ul>					
 			 </div>
 			 <div class="clearfix"></div>

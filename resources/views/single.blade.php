@@ -2,59 +2,71 @@
 
 @section('contenido')
 <div class="product">
-	 <div class="container">				
-		 <div class="product-price1">
-			 <div class="top-sing">
-				  <div class="col-md-7 single-top">	
-					 <div class="flexslider">					
-						<div class="thumb-image">
-                            @foreach ($producto->imagenes as $imga)      
-                            <img src="{{ asset('../storage/app/articulos')}}/{{$producto->id}}/{{$imga->nombre}}.png" >
-                            @endforeach
-                        </div>					 					 
-				 </div>	
-			     <div class="col-md-5 single-top-in simpleCart_shelfItem">
-					  <div class="single-para ">
-						 <h4> {{$producto->nombre}}</h4>							
-							<h5 class="item_price">$ {{$producto->precio}}</h5>							
-							<p class="para">{{$producto->descripcion}}</p>
-						    </div>
-							<a href="#" class="add-cart item_add">ADD TO CART</a>							
-					 </div>
-				 </div>
-				
-			 </div>
-	     </div>
-
-	 </div>
+     <div class="container">                
+         <div class="product-price1">
+             <div class="top-sing">
+                  <div class="col-md-7 single-top"> 
+                     <div class="flexslider">                   
+                        <div class="thumb-image">                            
+                            @if(count($producto->imagenes) == 0)
+                                <img src="{{ asset('/img/art_default.png')}}" alt="">
+                            @else
+                                <img src="{{ asset('../storage/app/articulos')}}/{{$producto->id}}/{{$producto->id}}.png" >
+                            @endif
+                        </div>                                       
+                    </div>
+                </div> 
+                 <div class="col-md-5 single-top-in simpleCart_shelfItem">
+                      <div class="single-para ">
+                         <h4> {{$producto->nombre}}</h4>                            
+                            <h5 class="item_price">$ {{$producto->precio}}</h5>     
+                            <p class="para">Cantidad: {{$producto->cantidad}}</p>                   
+                            <p class="para">{{$producto->descripcion}}</p>
+                            </div>
+                            @if(Auth::check())
+                                @if($producto->cantidad == 0)
+                                    <button class="btn btn-warning">Agotado</button>
+                                @else
+                                    <form method="POST" action="{{url('/comprar')}}">
+                                        <input type="hidden" name="_token" value="{{csrf_token() }}">            
+                                        <input type="submit" value="Comprar" class="add-cart item_add">
+                                        <input type="hidden" name="articulo_id" value="{{$producto->id}}">
+                                    </form>                         
+                                @endif
+                            @endif
+                     </div>
+                 </div>
+                
+             </div>
+         </div>
 </div>
 
 
 
 
 <!-- Zona de comentarios -->
-
-<div class="container">
-	<div class="col-xs-12 col-md-6">
-	    <form action="{{url('/comsuc')}}" accept-charset="UTF-8" method="POST">
-	        <input type="hidden" name="ArtID" value="{{$producto->id}}">
-	        <input type="hidden" name="_token" value="{{csrf_token() }}">
-	        <span>Este articulo se merece </span>
-	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-1" class="">
-	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-2" class="">
-	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-3" class="">
-	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-4" class="hidden">
-	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-5" class="hidden">
-	        <span> Bananas.</span>
-	        <input id="banana-range" type="range" name="bananas" min="1" max="5" oninput="bananas(this.value)" onchange="bananas(this.value)">
-	        <textarea class="form-control animated" cols="50" id="new-review" maxlength="250" name="comment" placeholder="Escribe un comentario..." rows="5"></textarea>
-	        <div class="text-right">
-	        	<input type="image" src="{{asset('img/babutton1.png')}}" alt="Submit" width="60" height="60">
-	        </div>
-	    </form>
-	</div>
-</div>
-
+@if(Auth::check())
+    <div class="container">
+    	<div class="col-xs-12 col-md-6">
+    	    <form action="{{url('/comsuc')}}" accept-charset="UTF-8" method="POST">
+    	        <input type="hidden" name="ArtID" value="{{$producto->id}}">
+    	        <input type="hidden" name="_token" value="{{csrf_token() }}">
+    	        <span>Este articulo se merece </span>
+    	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-1" class="">
+    	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-2" class="">
+    	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-3" class="">
+    	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-4" class="hidden">
+    	        <img src="{{asset('img/banana2.png')}}" alt="" id="banana-5" class="hidden">
+    	        <span> Bananas.</span>
+    	        <input id="banana-range" type="range" name="bananas" min="1" max="5" oninput="bananas(this.value)" onchange="bananas(this.value)">
+    	        <textarea class="form-control animated" cols="50" id="new-review" maxlength="250" name="comment" placeholder="Escribe un comentario..." rows="5"></textarea>
+    	        <div class="text-right">
+    	        	<input type="image" src="{{asset('img/babutton1.png')}}" alt="Submit" width="60" height="60">
+    	        </div>
+    	    </form>
+    	</div>
+    </div>
+@endif
 
 
 
@@ -183,12 +195,14 @@
                     <div class="com_review-block-description">{{$rat->comentario}}</div>
                 </div>
             </div>
-            @if (Auth::user()->rol->nombre === 'Admin')
-            <form action="{{url('/delcom')}}" accept-charset="UTF-8" method="POST">
-                <input type="hidden" name="ComID" value="{{$rat->id}}">
-                <input type="hidden" name="_token" value="{{csrf_token() }}">
-                <input type="image" src="{{asset('img/babutton2.png')}}" alt="Submit" id="" class="">
-            </form>
+            @if(Auth::check())
+                @if(Auth::user()->rol->nombre === 'Admin')
+                <form action="{{url('/delcom')}}" accept-charset="UTF-8" method="POST">
+                    <input type="hidden" name="ComID" value="{{$rat->id}}">
+                    <input type="hidden" name="_token" value="{{csrf_token() }}">
+                    <input type="image" src="{{asset('img/babutton2.png')}}" alt="Submit" id="" class="">
+                </form>
+                @endif
             @endif
             <hr/>
 			@endforeach

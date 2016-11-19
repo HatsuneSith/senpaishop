@@ -39,3 +39,6 @@ Route::get('/single/{art_id}', 'CategoriaController@producto');
 Route::get('/inventario', 'CategoriaController@inventario');
 Route::post('/comsuc', 'CategoriaController@comentariosuccess');
 Route::post('/delcom', 'CategoriaController@comentariodelete');
+Route::post('/comprar', 'CategoriaController@comprar');
+Route::get('/ventas', 'CategoriaController@ventas');
+Route::get('/compras', 'CategoriaController@compras');

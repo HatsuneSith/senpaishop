@@ -32,12 +32,14 @@ class additemController extends Controller{
 
 		$input =$request->file('avatar');
 		$imgname =$request->input('imgn');
-  		$input->storeAs('articulos/'. $item->id, $imgname.'.png');
+  		$input->storeAs('articulos/'. $item->id, $item->id.'.png');
 
   		$imagen=new \App\Imagen;
   		$imagen->nombre = $imgname;
   		$imagen->articulo_id = $item->id;
   		$imagen->save();
+  		
+  		return redirect()->back();
 	}
 	public function mBuscarArticulo(Request $request) {
 		$input = $request->all();
@@ -75,6 +77,9 @@ class additemController extends Controller{
 			$SubCre->articulo_id = $request->input('artid');
 			$SubCre->save();
 		}
+		$articulos = \App\Articulo::all();
+	    
+	    return view('additemView', compact('articulos'));
 
 	}
 
@@ -138,12 +143,7 @@ class additemController extends Controller{
 							$SubCre->save();
 						
 
-						}
-						$imagen=new \App\Imagen;
-  						$imagen->nombre = "art_default.png";
-  						$imagen->articulo_id = $idarticulo;
-  						$imagen->save();
-
+						}						
 			        }
 			    }
 			    fclose($handle);

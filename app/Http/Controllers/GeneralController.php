@@ -31,17 +31,16 @@ class GeneralController extends Controller
     }
 
 
-
-
-
     public function index()
     {
         $articulos = DB::table('articulos')
             ->join('valoraciones','valoraciones.articulo_id', 'articulos.id')
-            ->select('articulos.nombre', 'articulos.id', 'articulos.precio', DB::raw('COUNT(valoraciones.rating) as rating'))
+            ->leftjoin('imagenes', 'imagenes.articulo_id', 'articulos.id')
+            ->select('imagenes.id as imagenes', 'articulos.nombre', 'articulos.id', 'articulos.precio', DB::raw('COUNT(valoraciones.rating) as rating'))
             ->groupBy('articulos.nombre')
             ->groupBy('articulos.id')
             ->groupBy('articulos.precio')
+            ->groupBy('imagenes.id')
             ->take(9)
             ->get();
 

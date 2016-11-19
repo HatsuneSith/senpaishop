@@ -13,7 +13,11 @@
 					<a href="../single/{{$pr->id}}"><div class="product-grid">
 						<div class="more-product"><span></span></div>						
 						<div class="product-img b-link-stripe b-animate-go  thickbox">
-							<img src="../storage/app/articulos/{{$pr->id}}.jpg" class="img-responsive" alt="">
+							@if(count($pr->imagenes) == 0)
+                                <img src="{{ asset('/img/art_default.png')}}" class="img-responsive">
+                            @else
+                                <img src="{{ asset('../storage/app/articulos')}}/{{$pr->id}}/{{$pr->id}}.png" class="img-responsive">
+                            @endif
 							<div class="b-wrapper">
 							<h4 class="b-animate b-from-left  b-delay03">							
 							<button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Compra ya</button>
@@ -56,8 +60,8 @@
 				   
 				<section  class="sky-form">
 					<h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Precio</h4>
-					Mínimo: <span id="valor-menor">1</span> <input type="range" min="1" max="4000" id="rango-min">
-					Máximo: <span id="valor-mayor">4000</span> <input type="range" min="1" max="4000" id="rango-max">
+					Mínimo: <span id="valor-menor">10</span> <input type="range" min="1" max="16000" id="rango-min">
+					Máximo: <span id="valor-mayor">16000</span> <input type="range" min="1" max="16000" id="rango-max">
 				</section>
 				 
 				<section  class="sky-form">
@@ -93,8 +97,8 @@
 
 @section('scripts')
 	<script>
-		$('#rango-min').val(1);
-		$('#rango-max').val(4000);
+		$('#rango-min').val(10);
+		$('#rango-max').val(16000);
 
 		$('#rango-min').on('input change', function() {
 			var valor = $('#rango-min').val();
