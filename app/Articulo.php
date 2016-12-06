@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Articulo extends Model
 {
@@ -41,5 +42,16 @@ class Articulo extends Model
         else {
             return asset('../storage/app/articulos/' . $this->id . "/" . $this->id . '.png');
         }
+    }
+
+    public function valorado()
+    {        
+        foreach(Auth::user()->valoraciones as $valoracion)
+        {
+            if($valoracion->articulo_id == $this->id){
+                return true;
+            }
+        }
+        return false;
     }
 }

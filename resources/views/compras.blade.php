@@ -3,7 +3,7 @@
 @section('contenido')
 <section class="container">
 	<div class="product-model">
-		<div class="col-xs-9">
+		<div class="col-xs-9">			
 			<h2>Compras</h2>
 	      	<hr>
 		    <ul class="list-group">

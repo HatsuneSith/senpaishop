@@ -81,7 +81,7 @@ class RegisterController extends Controller
 
         $usuario->carrito_id = $carrito->id;
         
-        Mail::to($data['email'])->send(new ConfirmarCuenta($data['email']));        
+        //Mail::to($data['email'])->send(new ConfirmarCuenta($data['email']));        
 
         return $usuario;
     }

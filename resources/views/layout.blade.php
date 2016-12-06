@@ -15,6 +15,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="{{asset("css/memenu.css")}}" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
 <link href="{{asset("css/custom.css")}}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{asset("css/slick.css")}}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{asset("css/slick-theme.css")}}" rel="stylesheet" type="text/css" media="all" />
 <!--//theme style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -166,6 +168,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -178,6 +181,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="{{asset("js/custom.js")}}"></script>
 <!---->
 <script src="{{asset("js/responsiveslides.min.js")}}"></script>
+<script type="text/javascript" src="{{asset('js/slick.min.js')}}"></script>
 <script>  
     $(function () {
       $("#slider").responsiveSlides({
@@ -188,7 +192,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         pager: false,
       });
     });
+
+    $(document).ready(function(){
+	  $('.best-slider').slick({
+	  	arrows:true
+	  });
+	});
   </script>
   @yield('scripts')
+
 </body>
 </html>

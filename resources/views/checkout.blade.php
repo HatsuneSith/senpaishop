@@ -38,7 +38,7 @@
 						    	<a href="{{url('/single')}}/{{$ac->articulo->id}}">{{$ac->articulo->nombre}}</a>
 						    </h3>
 							<ul class="qty">								
-								<li>Cantidad : <input type="number" class="{{$ac->articulo->id}}" name="cantidad" min="1" value="{{$ac->cantidad_articulo}}"> </li>
+								<li>Cantidad : <input type="number" class="{{$ac->articulo->id}}" name="cantidad" min="1" max="{{$ac->articulo->cantidad}}" value="{{$ac->cantidad_articulo}}"> </li>
 							</ul>
 							<div class="delivery">
 								 <p>Precio : <span class="precio-{{$ac->articulo->id}}">{{$ac->costo_individual}}</span></p>
