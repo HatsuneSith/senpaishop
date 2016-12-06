@@ -1401,8 +1401,7 @@ h3.ghj {
 }
 .cart-item-info{
 	width:75%;
-	float:left;
-	margin-top: 3em;
+	float:left;	
 }
 .check-sec{
 	padding:5em 0 0;
@@ -1596,6 +1595,9 @@ ul.qty li{
 ul.qty li p{
 	font-size:0.8125em;
 	color:#555;
+}
+ul.qty li input{
+	width: 40px;
 }
 li.last_price span {
   margin-top: 0.4em;
