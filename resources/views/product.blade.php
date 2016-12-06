@@ -19,8 +19,12 @@
                                 <img src="{{ asset('../storage/app/articulos')}}/{{$pr->id}}/{{$pr->id}}.png" class="img-responsive">
                             @endif
 							<div class="b-wrapper">
-							<h4 class="b-animate b-from-left  b-delay03">							
-							<button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Compra ya</button>
+							<h4 class="b-animate b-from-left  b-delay03">
+							@if($pr->cantidad == 0)
+								<button  style="background-color:#d61414;"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Agotado</button>
+							@else
+								<button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Compra ya</button>
+							@endif
 							</h4>
 							</div>
 						</div></a>						
