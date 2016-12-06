@@ -14,6 +14,7 @@ use App\Carrito;
 use App\ArticuloCarrito;
 use App\subcategoria_articulo;
 use DB;
+use PDF;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EnviarRecibo;
 
@@ -211,6 +212,17 @@ class CategoriaController extends Controller
         $ac = ArticuloCarrito::find($request->input('ac_id'));
         $ac->delete();
         return redirect()->back();
+    }
+
+    public function obtener_pdf(Request $request)
+    {        
+        //$pdf = App::make('dompdf.wrapper');
+        //$pdf->loadHTML( view('detallecompra', compact($request) ) );
+        $venta = Venta::find($request->input('venta_id'));    
+        //$pdf = PDF::loadView('detallecompra', $venta);
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML( view('detallecompra', compact('venta') ) );
+        return $pdf->stream();
     }
 
     public function carrito()

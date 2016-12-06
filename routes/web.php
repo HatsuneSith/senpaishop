@@ -43,6 +43,7 @@ Route::post('/delcom', 'CategoriaController@comentariodelete');
 Route::post('/comprar', 'CategoriaController@comprar');
 Route::post('/agregar-carrito', 'CategoriaController@agregar_a_carrito');
 Route::post('/eliminar-articulo-carrito', 'CategoriaController@eliminar_articulo_carrito');
+Route::post('/pdf', 'CategoriaController@obtener_pdf');
 
 Route::get('/carrito', 'CategoriaController@carrito');
 Route::get('/ventas', 'CategoriaController@ventas');
