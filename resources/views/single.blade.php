@@ -1,45 +1,40 @@
 @extends('layout')
 
 @section('contenido')
-<div class="product">
-     <div class="container">                
-         <div class="product-price1">
-             <div class="top-sing">
-                  <div class="col-md-7 single-top"> 
-                     <div class="flexslider">                   
-                        <div class="thumb-image">                            
-                            @if(count($producto->imagenes) == 0)
-                                <img src="{{ asset('/img/art_default.png')}}" alt="">
-                            @else
-                                <img src="{{ asset('../storage/app/articulos')}}/{{$producto->id}}/{{$producto->id}}.png" >
-                            @endif
-                        </div>                                       
+
+<div class="container">                
+ <div class="product-price1">
+     <div class="top-sing">
+          <div class="col-md-7 single-top"> 
+             <div class="flexslider">                   
+                <div class="thumb-image">                            
+                    <img src="{{$producto->ruta_imagen()}}" alt="">
+                </div>                                       
+            </div>
+        </div> 
+         <div class="col-md-5 single-top-in simpleCart_shelfItem">
+              <div class="single-para ">
+                 <h4> {{$producto->nombre}}</h4>                            
+                    <h5 class="item_price">$ {{$producto->precio}}</h5>     
+                    <p class="para">Cantidad: {{$producto->cantidad}}</p>                   
+                    <p class="para">{{$producto->descripcion}}</p>
                     </div>
-                </div> 
-                 <div class="col-md-5 single-top-in simpleCart_shelfItem">
-                      <div class="single-para ">
-                         <h4> {{$producto->nombre}}</h4>                            
-                            <h5 class="item_price">$ {{$producto->precio}}</h5>     
-                            <p class="para">Cantidad: {{$producto->cantidad}}</p>                   
-                            <p class="para">{{$producto->descripcion}}</p>
-                            </div>
-                            @if(Auth::check())
-                                @if($producto->cantidad == 0)
-                                    <button class="btn btn-warning">Agotado</button>
-                                @else
-                                    <form method="POST" action="{{url('/comprar')}}">
-                                        <input type="hidden" name="_token" value="{{csrf_token() }}">            
-                                        <input type="submit" value="Comprar" class="add-cart item_add">
-                                        <input type="hidden" name="articulo_id" value="{{$producto->id}}">
-                                    </form>                         
-                                @endif
-                            @endif
-                     </div>
-                 </div>
-                
+                    @if(Auth::check())
+                        @if($producto->cantidad == 0)
+                            <button class="btn btn-warning">Agotado</button>
+                        @else
+                            <form method="POST" action="{{url('/agregar-carrito')}}">
+                                <input type="hidden" name="_token" value="{{csrf_token() }}">            
+                                <input type="hidden" name="articulo_id" value="{{$producto->id}}">
+                                <input type="submit" value="Agregar al Carrito" class="add-cart item_add">
+                            </form>
+                        @endif
+                    @endif
              </div>
          </div>
-</div>
+        
+     </div>
+ </div>
 
 
 

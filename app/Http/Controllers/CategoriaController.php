@@ -10,8 +10,12 @@ use App\SubCategoria;
 use App\Imagen;
 use App\Valoracion;
 use App\Venta;
+use App\Carrito;
+use App\ArticuloCarrito;
 use App\subcategoria_articulo;
 use DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EnviarRecibo;
 
 class CategoriaController extends Controller
 {
@@ -163,14 +167,55 @@ class CategoriaController extends Controller
     public function comprar(Request $request) 
     {
         $venta = new Venta;
-        $articulo = Articulo::find($request->input('articulo_id'));
-        $articulo->cantidad = $articulo->cantidad - 1;
-        $venta->articulo_id = $articulo->id;
         $venta->usuario_id = Auth::user()->id;
+        $venta->total = 0;
+        $venta->save();       
+        $total = 0;
 
+        $carrito = Auth::user()->carrito;
+        $json_cantidades = json_decode($request->input('cantidades'));
+        $i = 0;
+        foreach($carrito->articulos as $ac) {
+            $ac->articulo->cantidad -= $json_cantidades[$i];
+            $ac->articulo->save();
+            DB::table('articulo_carrito')
+                ->where('carrito_id', $carrito->id)
+                ->where('articulo_id', $ac->articulo->id)
+                ->where('venta_id', null)
+                ->update(['cantidad_articulo' => $json_cantidades[$i], 'venta_id' => $venta->id ]);                
+
+            $total += $json_cantidades[$i] * $ac->costo_individual;
+            $i++;
+        }        
+        $venta->total = $total + 150;        
         $venta->save();
-        $articulo->save();
+        $carrito->limpia_carrito($venta->id);
 
+        Mail::to(Auth::user()->email)->send(new EnviarRecibo($venta));
+
+        return redirect('carrito');
+    }
+
+    public function agregar_a_carrito(Request $request)
+    {
+        $usuario = Auth::user();        
+
+        $articulo_agregado = new ArticuloCarrito;
+        $articulo_agregado->agrega_articulo($request->input('articulo_id'), $usuario->carrito->id);
+
+        return redirect('carrito');
+    }
+
+    public function eliminar_articulo_carrito(Request $request)
+    {
+        $ac = ArticuloCarrito::find($request->input('ac_id'));
+        $ac->delete();
         return redirect()->back();
+    }
+
+    public function carrito()
+    {
+        $carrito = Auth::user()->carrito;        
+        return view('checkout', compact('carrito'));
     }
 }

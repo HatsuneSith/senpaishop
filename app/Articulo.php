@@ -13,19 +13,33 @@ class Articulo extends Model
         return $this->hasMany('App\Imagen');
     }
 
-    public function ventas()
-    {
-        return $this->hasMany('App\Venta');
-    }
-
     public function valoraciones()
     {
         return $this->hasMany('App\Valoracion');
     }
 
-
     public function subcategorias()
     {
         return $this->belongsToMany('App\SubCategoria', 'subcategoria_articulo');
+    }
+
+    public function articulos_carritos()
+    {
+        return $this->hasMany('App\ArticuloCarrito', 'articulo_id');
+    }
+
+    public function ventas()
+    {
+        return $this->articulos_carritos->ventas;
+    }
+
+    public function ruta_imagen()
+    {
+        if( count( $this->imagenes ) == 0 ) {
+            return asset('/img/art_default.png');
+        }
+        else {
+            return asset('../storage/app/articulos/' . $this->id . "/" . $this->id . '.png');
+        }
     }
 }

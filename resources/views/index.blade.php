@@ -28,11 +28,9 @@
 				 </div>
 				 </div>
 	         </li>
-	      </ul>
-	  </div>
-  </div>
-<!---->
-<script src="{{asset("js/bootstrap.js")}}"> </script>
+	    </ul>
+	</div>
+</div>
 
 <div class="items">
 	 <div class="container">

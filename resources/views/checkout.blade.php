@@ -4,94 +4,102 @@
 <div class="container">
 	<div class="check-sec">	 
 		<div class="col-md-3 cart-total">
-			<a class="continue" href="product.html">Continue to basket</a>
+			<a class="continue" href="{{url('/')}}">Agregar más al Carrito</a>
 			<div class="price-details">
-				<h3>Price Details</h3>
+				<h3>Detalles de Compra</h3>
 				<span>Total</span>
-				<span class="total1">6200.00</span>
-				<span>Discount</span>
-				<span class="total1">10%(Festival Offer)</span>
-				<span>Delivery Charges</span>
-				<span class="total1">150.00</span>
-				<div class="clearfix"></div>				 
+				<span class="total1 precio-inicial">{{$carrito->calcular_total()}}</span>				
+				<span>Costos de Envío</span>
+				<span class="total1">150</span>
+				<div class="clearfix"></div>		 
 			</div>	
 			<ul class="total_price">
-			   <li class="last_price"> <h4>TOTAL</h4></li>	
-			   <li class="last_price"><span>6150.00</span></li>			   
-			</ul> 
+			   <li class="last_price"><h4>TOTAL</h4></li>	
+			   <li class="last_price"><span class="precio-final">{{ $carrito->calcular_total() + 150 }}</span></li>			   
+			</ul>
 			<div class="clearfix"></div>
 			<div class="clearfix"></div>
-			<a class="order" href="#">Place Order</a>
-			<div class="total-item">
-				<h3>OPTIONS</h3>
-				<h4>COUPONS</h4>
-				<a class="cpns" href="#">Apply Coupons</a>
-			</div>
+			<a class="order" href="#">Comprar</a>
+			<form action="{{url('/comprar')}}" method="POST" id="form-compra">
+				<input type="hidden" name="_token" value="{{csrf_token() }}">  
+				<input type="hidden" name="cantidades" value="">
+			</form>			
 		</div>
 		<div class="col-md-9 cart-items">
-			<h1>My Shopping Bag (2)</h1>
-				<script>$(document).ready(function(c) {
-					$('.close1').on('click', function(c){
-						$('.cart-header').fadeOut('slow', function(c){
-							$('.cart-header').remove();
-						});
-						});	  
-					});
-			   </script>
-			<div class="cart-header">
-				<div class="close1"> </div>
-				<div class="cart-sec simpleCart_shelfItem">
+			<h1>Mis Artículos ({{count($carrito->articulos)}})</h1>
+			@foreach($carrito->articulos as $ac)
+				<div class="cart-header">
+					<div class="cart-sec simpleCart_shelfItem">			
 						<div class="cart-item cyc">
-							<img src="images/p4.jpg" class="img-responsive" alt=""/>
-						</div>
-					   <div class="cart-item-info">
-						    <h3><a href="single.html">Rock Light Emergency Lights</a><span>Model No: RL-5511S</span></h3>
-							<ul class="qty">
-								<li><p>Size : 5</p></li>
-								<li><p>Qty : 1</p></li>
+							<img src="{{ $ac->articulo->ruta_imagen() }}" class="img-responsive" alt=""/>
+						</div>						
+					   <div class="cart-item-info">					   		
+						    <h3>
+						    	<a href="{{url('/single')}}/{{$ac->articulo->id}}">{{$ac->articulo->nombre}}</a>
+						    </h3>
+							<ul class="qty">								
+								<li>Cantidad : <input type="number" class="{{$ac->articulo->id}}" name="cantidad" min="1" value="{{$ac->cantidad_articulo}}"> </li>
 							</ul>
 							<div class="delivery">
-								 <p>Service Charges : Rs.100.00</p>
-								 <span>Delivered in 2-3 bussiness days</span>
+								 <p>Precio : <span class="precio-{{$ac->articulo->id}}">{{$ac->costo_individual}}</span></p>
 								 <div class="clearfix"></div>
-							</div>								
+							</div>
+							<div>
+								<form action="{{url('/eliminar-articulo-carrito')}}" method="POST">
+									<input type="hidden" name="_token" value="{{csrf_token()}}">
+									<input type="hidden" name="ac_id" value="{{$ac->id}}">									
+									<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>Eliminar del Carrito</button>
+								</form>								
+							</div>
 					   </div>
-					   <div class="clearfix"></div>
-											
-				  </div>
-			 </div>
-			 <script>$(document).ready(function(c) {
-					$('.close2').on('click', function(c){
-							$('.cart-header2').fadeOut('slow', function(c){
-						$('.cart-header2').remove();
-					});
-					});	  
-					});
-			 </script>
-			<div class="cart-header2">
-				<div class="close2"> </div>
-					<div class="cart-sec simpleCart_shelfItem">
-						<div class="cart-item cyc">
-							 <img src="images/p3.jpg" class="img-responsive" alt=""/>
-						</div>
-					    <div class="cart-item-info">
-							 <h3><a href="single.html">Show Lights</a><span>Model No: SL-3578</span></h3>
-							<ul class="qty">
-								<li><p>Size : 5</p></li>
-								<li><p>Qty : 1</p></li>
-							</ul>
-							<div class="delivery">
-								<p>Service Charges : Rs.100.00</p>
-								<span>Delivered in 2-3 bussiness days</span>
-								<div class="clearfix"></div>
-							</div>							
-					   </div>
-					   <div class="clearfix"></div>					
-				    </div>
-			</div>		
+					</div>
+					<div class="clearfix"></div>					
+				 </div>		 	
+			 @endforeach
 		</div>
 		<div class="clearfix"> </div>
 	</div>
 </div>
 
+@stop
+
+@section('scripts')
+	<script>	 	
+		//alert($('input[name=cantidad]').val());
+		$(":input").bind('keyup mouseup', function (obj) {			
+		    var total = parseInt($('.total1').html());
+		    var cantidad = obj.currentTarget.value;
+		    var precio_articulo = parseInt($('.precio-'+obj.currentTarget.className).html());
+		    var precio_inicial = parseInt($('.precio-inicial').html());
+		    var precio_final = parseInt($('.precio-final').html());		    
+
+		    var aumenta = obj.currentTarget.defaultValue < obj.currentTarget.value;
+		    var cantidad_inicial = obj.currentTarget.defaultValue;
+
+		    //Evita que cambie el precio si quiere bajar de 1 la cantidad
+		    if(obj.currentTarget.defaultValue == 1 && !aumenta)
+		    	return;
+
+			obj.currentTarget.defaultValue = obj.currentTarget.value;
+
+			if(aumenta) {				
+				$('.precio-inicial').html(precio_inicial - (cantidad_inicial * precio_articulo) + (cantidad * precio_articulo));
+				$('.precio-final').html(precio_final - (cantidad_inicial * precio_articulo) + (cantidad * precio_articulo));
+			}
+			else {				
+				$('.precio-inicial').html(precio_inicial - (cantidad_inicial * precio_articulo) + (cantidad * precio_articulo));
+				$('.precio-final').html(precio_final - (cantidad_inicial * precio_articulo) + (cantidad * precio_articulo));
+			}
+		});
+
+		$('.order').click(function() {
+			var articulos = [];
+			$('input[name=cantidad]').each(function(i, obj) {
+				articulos.push(parseInt(obj.value));
+			});
+
+			$('input[name=cantidades]').val(JSON.stringify(articulos));
+			$('#form-compra').submit();			
+		});
+	</script>	
 @stop

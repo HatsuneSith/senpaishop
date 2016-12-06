@@ -14,16 +14,16 @@ class CrearLlavesForaneas extends Migration
     public function up()
     {
         Schema::table('usuarios', function($table) {
-            $table->integer('rol_id')->unsigned();            
+            $table->integer('rol_id')->unsigned();
+            $table->integer('carrito_id')->unsigned()->nullable();          
 
             $table->foreign('rol_id')->references('id')->on('roles');
+            $table->foreign('carrito_id')->references('id')->on('carritos');
         });
 
-        Schema::table('ventas', function($table) {
-            $table->integer('articulo_id')->unsigned();
+        Schema::table('ventas', function($table) {            
             $table->integer('usuario_id')->unsigned();
-
-            $table->foreign('articulo_id')->references('id')->on('articulos');
+            
             $table->foreign('usuario_id')->references('id')->on('usuarios');
         });
 

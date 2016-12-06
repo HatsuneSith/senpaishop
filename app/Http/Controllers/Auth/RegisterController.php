@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Usuario;
 use App\Rol;
+use App\Carrito;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -74,6 +75,12 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
+        $carrito = new Carrito;
+        $carrito->usuario_id = $usuario->id;
+        $carrito->save();
+
+        $usuario->carrito_id = $carrito->id;
+        
         Mail::to($data['email'])->send(new ConfirmarCuenta($data['email']));        
 
         return $usuario;

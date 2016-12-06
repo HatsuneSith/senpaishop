@@ -13,8 +13,8 @@ class Venta extends Model
         return $this->belongsTo('App\Usuario');
     }
 
-    public function articulo()
+    public function articulos_carrito()
     {
-        return $this->belongsTo('App\Articulo');
+    	return $this->hasMany('App\ArticuloCarrito', 'venta_id');
     }
 }

@@ -13,6 +13,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--theme style-->
 <link href="{{asset("css/style.css")}}" rel="stylesheet" type="text/css" media="all" />	
 <link href="{{asset("css/memenu.css")}}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
 <link href="{{asset("css/custom.css")}}" rel="stylesheet" type="text/css" media="all" />
 <!--//theme style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -55,7 +56,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="mepanel">
 							<div class="row">
 								<div class="col1 me-one">
-									<a href="{{ url('/compras') }}"><h4>Compras</h4></a>
+									<a href="{{ url('/compras') }}"><h4>Historial de Compras</h4></a>
 								</div>
 							</div>
 						</div>
@@ -87,21 +88,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				@endif				
 			</ul>
 			<div class="clearfix"> </div>
-		 </div>
-		<!---
+		 </div>		
 		@if(Auth::check())
 			<div class="cart box_1">		
 				<a href="checkout.html">
 					<div class="total">
-						<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span>)
+						<span><a href="{{url('/carrito')}}">Carrito <span class="badge">{{ @Auth::user()->carrito->total_articulos()}}</span></a></span>
 					</div>
-					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-				</a>
-				<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+					<a href="{{url('/carrito')}}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+				</a>				
 			 	<div class="clearfix"> </div>
 			</div>
-		@endif
-		-->
+		@endif		
 		<div class="clearfix"> 
 		</div>
 	</div>
@@ -167,8 +165,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	 </div>
 </div>
 
-<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- start menu -->
 <script src="{{asset("js/simpleCart.min.js")}}"> </script>
